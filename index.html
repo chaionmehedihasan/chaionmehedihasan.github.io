@@ -48,7 +48,10 @@
     .hero { display: grid; grid-template-columns: 1.4fr .8fr; gap: 36px; align-items: start; }
     h1 { font-family: "Source Serif 4", Georgia, serif; font-size: clamp(2rem, 4vw, 2.7rem); font-weight: 600; line-height: 1.15; }
     .role { margin-top: 10px; color: var(--accent); font-weight: 600; }
-    .lede { margin-top: 14px; color: var(--muted); max-width: 58ch; }
+    .who { display: flex; gap: 18px; align-items: center; }
+    .portrait { width: 148px; height: auto; border-radius: 12px; border: 1px solid var(--line); flex: none; }
+    .work-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+    .work-links a { font-size: 0.85rem; font-weight: 600; }
     .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
     .chip { background: var(--chip); font-size: 0.82rem; font-weight: 600; padding: 5px 10px; border-radius: 999px; }
     .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 18px; }
@@ -99,8 +102,13 @@
   <main id="top">
     <div class="hero">
       <div>
-        <h1>Mehedi Hasan Chaion</h1>
-        <p class="role">Integrated M.S.–Ph.D. student in Electronic Engineering<br />ASER Lab, Kwangwoon University, Seoul</p>
+        <div class="who">
+          <img class="portrait" src="chaion.jpg" width="148" height="94" alt="Mehedi Hasan Chaion presenting, the photograph on his Google Scholar profile" />
+          <div>
+            <h1>Mehedi Hasan Chaion</h1>
+            <p class="role">Integrated M.S.–Ph.D. student in Electronic Engineering<br />ASER Lab, Kwangwoon University, Seoul</p>
+          </div>
+        </div>
         <p class="lede">
           I build polymer nanofibers and films into wearable, self-powered sensors and smart-textile devices, then measure the electrical output. The degree is Electronic Engineering. Textile engineering is how I put those layers on cloth, not a return to ordinary garment production.
         </p>
@@ -132,13 +140,9 @@
       </p>
       <div class="grid">
         <article class="card">
-          <h3>Current focus</h3>
-          <ul>
-            <li>Polymer nanofiber and film fabrication for wearable devices</li>
-            <li>Triboelectric nanogenerators and self-powered sensors</li>
-            <li>Functional coatings and smart-textile substrates</li>
-            <li>Electrical output under controlled mechanical input</li>
-          </ul>
+          <h3>Current research</h3>
+          <p>Wearable, self-powered sensors at ASER Lab. The public record of this work is the lab profile. Device papers from the Ph.D. will be added here when they are published.</p>
+          <p class="work-links"><a href="http://aser.kw.ac.kr/members/profile/chaion-kw.ac.kr">ASER Lab profile</a></p>
         </article>
         <article class="card">
           <h3>Background that I use</h3>
@@ -184,6 +188,7 @@
         <p class="meta">SPE polymers 5 (4), 481-506, 2024</p>
         <p class="meta"><strong>246</strong> citations on Scholar · <strong>Impact factor 6.4</strong> · OpenAlex 2-year mean 9.3</p>
         <p class="note">Journal Impact Factor, stated on the Wiley journal page</p>
+        <p class="work-links"><a href="https://doi.org/10.1002/pls2.10145">Open the paper</a></p>
       </div>
       <div class="pub">
         <a class="title" href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=E513RsEAAAAJ&amp;pagesize=100&amp;citation_for_view=E513RsEAAAAJ:_Qo2XoVZTnwC"><strong>A multi-functional coating on cotton fabric to incorporate electro-conductive, anti-bacterial, and flame-retardant properties</strong></a>
@@ -191,6 +196,7 @@
         <p class="meta">Heliyon 10 (17), 2024</p>
         <p class="meta"><strong>13</strong> citations on Scholar · OpenAlex 2-year mean 9.3</p>
         <p class="note">No Journal Impact Factor in the June 2026 JCR. Web of Science had paused the journal.</p>
+        <p class="work-links"><a href="https://doi.org/10.1016/j.heliyon.2024.e37120">Open the paper</a></p>
       </div>
       <div class="pub">
         <a class="title" href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=E513RsEAAAAJ&amp;pagesize=100&amp;citation_for_view=E513RsEAAAAJ:AvfA0Oy_GE0C"><strong>Silver nanoparticle based polymer composites: synthesis, fabrication and biomedical applications</strong></a>
@@ -198,6 +204,7 @@
         <p class="meta">Inorganic Chemistry Communications, 115584, 2025</p>
         <p class="meta"><strong>5</strong> citations on Scholar · <strong>Impact factor 5.9</strong> · OpenAlex 2-year mean 6.3</p>
         <p class="note">Journal Impact Factor, stated on the Elsevier journal page</p>
+        <p class="work-links"><a href="https://doi.org/10.1016/j.inoche.2025.115584">Open the paper</a></p>
       </div>
       <div class="pub">
         <a class="title" href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=E513RsEAAAAJ&amp;pagesize=100&amp;citation_for_view=E513RsEAAAAJ:LO7wyVUgiFcC"><strong>Recent Advances in Nanocomposite Hydrogel Sensors for Healthcare Applications: Fabrication Techniques, Multifunctionality and Challenges</strong></a>
@@ -205,6 +212,7 @@
         <p class="meta">nanomaterials 16 (9), 1628, 2026</p>
         <p class="meta"><strong>0</strong> citations on Scholar · <strong>Impact factor 4.8</strong> · OpenAlex 2-year mean 6.7</p>
         <p class="note">Impact Factor 2025, stated on the MDPI journal page</p>
+        <p class="work-links"><a href="https://doi.org/10.3390/nano16191211">Open the paper</a></p>
       </div>
       <div class="pub">
         <a class="title" href="https://scholar.google.com/citations?view_op=view_citation&amp;hl=en&amp;user=E513RsEAAAAJ&amp;pagesize=100&amp;citation_for_view=E513RsEAAAAJ:Z5m8FVwuT1cC"><strong>Bio-Manufacturing and Processing of Textiles for Sustainability</strong></a>
@@ -259,6 +267,14 @@
     function text(value) {
       return String(value == null ? "" : value);
     }
+    function publishedLink(paper) {
+      const title = text(paper.title).toLowerCase();
+      if (title.indexOf("natural fiber") !== -1) return "https://doi.org/10.1002/pls2.10145";
+      if (title.indexOf("coating") !== -1) return "https://doi.org/10.1016/j.heliyon.2024.e37120";
+      if (title.indexOf("silver") !== -1) return "https://doi.org/10.1016/j.inoche.2025.115584";
+      if (title.indexOf("hydrogel") !== -1) return "https://doi.org/10.3390/nano16191211";
+      return "";
+    }
     function renderScholar(data) {
       const checked = new Date(data.checkedAt);
       const when = checked.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
@@ -297,6 +313,16 @@
         note.className = "note";
         note.textContent = text(paper.impactNote);
         wrap.append(link, authors, venue, counts, note);
+        const paperHref = publishedLink(paper);
+        if (paperHref) {
+          const links = document.createElement("p");
+          links.className = "work-links";
+          const open = document.createElement("a");
+          open.href = paperHref;
+          open.textContent = "Open the paper";
+          links.appendChild(open);
+          wrap.appendChild(links);
+        }
         list.appendChild(wrap);
       });
     }
