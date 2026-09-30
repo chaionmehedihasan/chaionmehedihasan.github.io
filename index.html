@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mehedi Hasan Chaion | Wearable Electronic Materials</title>
+  <meta name="description" content="Integrated M.S.–Ph.D. student in Electronic Engineering at Kwangwoon University. Smart textiles, polymer nanofibers, and wearable self-powered sensors." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #1c2430;
+      --muted: #5b6573;
+      --line: #e4e8ee;
+      --bg: #f7f5f1;
+      --card: #ffffff;
+      --accent: #0f5c5c;
+      --accent-soft: #e6f2f1;
+      --chip: #eef3f2;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Source Sans 3", system-ui, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.65;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(247,245,241,.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav {
+      max-width: 980px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 22px; gap: 16px;
+    }
+    .brand { font-weight: 700; letter-spacing: .02em; color: var(--ink); text-decoration: none; }
+    .brand:hover { text-decoration: none; }
+    .nav-links { display: flex; gap: 18px; flex-wrap: wrap; font-size: 0.95rem; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-weight: 500; }
+    .nav-links a:hover { color: var(--accent); }
+    main { max-width: 980px; margin: 0 auto; padding: 36px 22px 80px; }
+    .hero {
+      display: grid; grid-template-columns: 1.4fr .8fr; gap: 36px;
+      align-items: start; padding: 18px 0 28px;
+    }
+    h1 {
+      font-family: "Source Serif 4", Georgia, serif;
+      font-size: clamp(2rem, 4vw, 2.7rem);
+      font-weight: 600; line-height: 1.15; margin-bottom: 10px;
+    }
+    .role { font-size: 1.08rem; color: var(--accent); font-weight: 600; margin-bottom: 14px; }
+    .lede { color: var(--muted); max-width: 58ch; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .chip {
+      background: var(--chip); color: var(--ink);
+      font-size: 0.82rem; font-weight: 600;
+      padding: 5px 10px; border-radius: 999px;
+    }
+    .side-card {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 16px; padding: 20px 20px 16px;
+    }
+    .side-card h3 { font-size: 0.78rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+    .side-card p, .side-card li { font-size: 0.95rem; }
+    .side-card ul { list-style: none; }
+    .side-card li { padding: 6px 0; border-bottom: 1px solid var(--line); }
+    .side-card li:last-child { border-bottom: 0; }
+    section { margin-top: 48px; }
+    h2 {
+      font-family: "Source Serif 4", Georgia, serif;
+      font-size: 1.55rem; font-weight: 600;
+      margin-bottom: 16px; padding-bottom: 8px;
+      border-bottom: 2px solid var(--accent);
+      display: inline-block;
+    }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .card {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 14px; padding: 18px 18px 16px;
+    }
+    .card h3 { font-size: 1.02rem; margin-bottom: 6px; }
+    .card p, .card li { color: var(--muted); font-size: 0.95rem; }
+    .card ul { padding-left: 18px; }
+    .pub { padding: 14px 0; border-bottom: 1px solid var(--line); }
+    .pub:last-child { border-bottom: 0; }
+    .pub .title { font-weight: 600; color: var(--ink); }
+    .pub .meta { color: var(--muted); font-size: 0.92rem; margin-top: 4px; }
+    .pub .tag { display: inline-block; margin-top: 6px; font-size: 0.75rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--accent); background: var(--accent-soft); padding: 2px 8px; border-radius: 999px; }
+    .timeline { list-style: none; }
+    .timeline li { position: relative; padding: 0 0 22px 20px; border-left: 2px solid var(--line); }
+    .timeline li:last-child { padding-bottom: 0; }
+    .timeline li::before {
+      content: ""; position: absolute; left: -6px; top: 7px;
+      width: 10px; height: 10px; border-radius: 50%; background: var(--accent);
+    }
+    .when { font-size: 0.82rem; color: var(--muted); font-weight: 600; }
+    footer {
+      max-width: 980px; margin: 0 auto; padding: 10px 22px 40px;
+      color: var(--muted); font-size: 0.88rem;
+    }
+    @media (max-width: 760px) {
+      .hero, .grid-2 { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <a class="brand" href="#top">Mehedi Hasan Chaion</a>
+      <nav class="nav-links">
+        <a href="#research">Research</a>
+        <a href="#methods">Methods</a>
+        <a href="#publications">Publications</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <main id="top">
+    <div class="hero">
+      <div>
+        <h1>Mehedi Hasan Chaion</h1>
+        <p class="role">Integrated M.S.–Ph.D. student in Electronic Engineering<br />ASER Lab, Kwangwoon University, Seoul</p>
+        <p class="lede">Textile-trained researcher working at the interface of functional polymers and flexible electronics. I fabricate polymer nanofibers and films and study them as layers for wearable, self-powered sensors and smart textiles.</p>
+        <div class="chips">
+          <span class="chip">Smart textiles</span>
+          <span class="chip">Nanofibers</span>
+          <span class="chip">TENG</span>
+          <span class="chip">Wearable sensors</span>
+          <span class="chip">Polymer composites</span>
+        </div>
+      </div>
+      <aside class="side-card">
+        <h3>Now</h3>
+        <ul>
+          <li>Electronic Engineering, Kwangwoon University</li>
+          <li>ASER Laboratory — energy harvesting and wearable devices</li>
+          <li>B.Sc. Textile Engineering, JUST (2018–2023)</li>
+          <li><a href="https://scholar.google.com/citations?user=E513RsEAAAAJ" target="_blank" rel="noopener">Google Scholar</a></li>
+          <li><a href="http://aser.kw.ac.kr/members/profile/chaion-kw.ac.kr" target="_blank" rel="noopener">ASER Lab profile</a></li>
+        </ul>
+      </aside>
+    </div>
+    <section id="research">
+      <h2>Research</h2>
+      <p style="max-width:70ch;color:var(--muted);margin-bottom:16px;">My work sits between textile materials and electronic devices. The aim is not commodity fabric processing and not silicon process engineering. I design and process polymer composites and nanofibers, place them on soft or textile substrates, and measure them as triboelectric and wearable sensing layers.</p>
+      <div class="grid-2">
+        <article class="card">
+          <h3>Current focus</h3>
+          <ul>
+            <li>Polymer nanofiber and film fabrication for wearable devices</li>
+            <li>Triboelectric nanogenerators and self-powered sensors</li>
+            <li>Functional coatings and smart-textile substrates</li>
+            <li>Electrical output under controlled mechanical input</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Background that I use</h3>
+          <ul>
+            <li>Fiber, yarn, and fabric structure from textile engineering</li>
+            <li>Multifunctional textile coatings (conductive, antibacterial, flame-retardant)</li>
+            <li>Polymer nanocomposite processing</li>
+            <li>Collaboration with physical-sensor and biosensor teammates in ASER Lab</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+    <section id="methods">
+      <h2>Methods I use</h2>
+      <div class="grid-2">
+        <article class="card">
+          <h3>Fabrication</h3>
+          <p>Electrospinning, polymer film preparation, spin coating, thermal processing (oven / vacuum oven), electrode work including laser-induced graphene when needed.</p>
+        </article>
+        <article class="card">
+          <h3>Electrical measurement</h3>
+          <p>Linear motor and force-controlled tapping, oscilloscope, electrometer, transferred charge and current, LCR.</p>
+        </article>
+        <article class="card">
+          <h3>Structure and surface</h3>
+          <p>SEM, FTIR, thickness measurement, contact-angle measurement.</p>
+        </article>
+        <article class="card">
+          <h3>Reliability (building)</h3>
+          <p>Wash, stretch, and humidity tests on wearable samples — added when the experiment is closed, not as a machine list.</p>
+        </article>
+      </div>
+    </section>
+    <section id="publications">
+      <h2>Publications</h2>
+      <div class="pub">
+        <div class="title">Advancements and challenges in natural fiber-reinforced hybrid composites: a comprehensive review</div>
+        <div class="meta">T. Islam, <strong>M. H. Chaion</strong>, M. A. Jalil, A. S. Rafi, F. Mushtari, A. K. Dhar, S. Hossain. <em>SPE Polymers</em> 5 (4), 481–506, 2024.</div>
+        <span class="tag">Review · highly cited</span>
+      </div>
+      <div class="pub">
+        <div class="title">A multi-functional coating on cotton fabric to incorporate electro-conductive, anti-bacterial, and flame-retardant properties</div>
+        <div class="meta">A. S. Rafi, <strong>M. H. Chaion</strong>, T. Chakrovarty, M. T. Islam, C. K. Kundu. <em>Heliyon</em> 10 (17), 2024.</div>
+        <span class="tag">Textile coating</span>
+      </div>
+      <div class="pub">
+        <div class="title">Silver nanoparticle based polymer composites: synthesis, fabrication and biomedical applications</div>
+        <div class="meta"><strong>M. H. Chaion</strong>, M. Rabbani, A. S. Rafi, M. A. Jalil, C. K. Kundu. <em>Inorganic Chemistry Communications</em>, 115584, 2025.</div>
+        <span class="tag">First author</span>
+      </div>
+      <div class="pub">
+        <div class="title">Recent advances in nanocomposite hydrogel sensors for healthcare applications</div>
+        <div class="meta">M. M. Hossain, T. Islam, <strong>M. H. Chaion</strong>, et al. <em>Nanomaterials</em> 16 (9), 1628, 2026.</div>
+        <span class="tag">Review</span>
+      </div>
+      <div class="pub">
+        <div class="title">Bio-manufacturing and processing of textiles for sustainability</div>
+        <div class="meta">C. K. Kundu, <strong>M. H. Chaion</strong>, B. Fei. In <em>Advances in Textile Materials and Processing Techniques for Sustainability</em>, 2025.</div>
+        <span class="tag">Book chapter</span>
+      </div>
+      <p style="margin-top:14px;font-size:0.95rem;">Full record: <a href="https://scholar.google.com/citations?user=E513RsEAAAAJ" target="_blank" rel="noopener">Google Scholar</a></p>
+    </section>
+    <section id="experience">
+      <h2>Education and experience</h2>
+      <ul class="timeline">
+        <li>
+          <div class="when">2025 – present · Seoul</div>
+          <strong>Integrated M.S.–Ph.D., Electronic Engineering</strong><br />
+          ASER Lab, Kwangwoon University. Energy harvesting, flexible electronics, self-powered and wearable sensors, smart textiles.
+        </li>
+        <li>
+          <div class="when">2024 · Dhaka</div>
+          <strong>JUST Energy Transition Champion Fellow</strong><br />
+          Oxfam in Bangladesh. Independent research fellowship for young researchers.
+        </li>
+        <li>
+          <div class="when">2023 · Dhaka</div>
+          <strong>Executive, Alliance Knit Composite</strong>
+        </li>
+        <li>
+          <div class="when">2018 – 2023 · Jashore</div>
+          <strong>B.Sc. Textile Engineering</strong><br />
+          Jashore University of Science and Technology (JUST).
+        </li>
+      </ul>
+    </section>
+    <section id="contact">
+      <h2>Contact</h2>
+      <div class="card" style="max-width:560px;">
+        <p>Kwangwoon University · ASER Lab · Room 607, Research Building</p>
+        <p style="margin-top:8px;">
+          <a href="http://aser.kw.ac.kr/members/profile/chaion-kw.ac.kr" target="_blank" rel="noopener">Lab profile</a>
+          ·
+          <a href="https://scholar.google.com/citations?user=E513RsEAAAAJ" target="_blank" rel="noopener">Scholar</a>
+        </p>
+        <p style="margin-top:8px;color:var(--muted);">Add your @kw.ac.kr email here before you share the site widely.</p>
+      </div>
+    </section>
+  </main>
+  <footer>
+    Mehedi Hasan Chaion · Seoul.
+  </footer>
+</body>
+</html>
