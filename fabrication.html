@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fabrication | Mehedi Hasan Chaion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root { --ink:#1c2430; --muted:#5b6573; --line:#e4e8ee; --bg:#f7f5f1; --card:#fff; --accent:#0f5c5c; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Source Sans 3", system-ui, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.6; }
+    a { color: var(--accent); }
+    header { position: sticky; top: 0; background: rgba(247,245,241,.92); border-bottom: 1px solid var(--line); }
+    .bar { max-width: 760px; margin: 0 auto; padding: 14px 22px; display: flex; justify-content: space-between; }
+    .brand { color: var(--ink); font-weight: 700; text-decoration: none; }
+    main { max-width: 760px; margin: 0 auto; padding: 32px 22px 80px; }
+    h1 { font-family: "Source Serif 4", Georgia, serif; font-weight: 600; }
+    .card, .note-card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 18px; }
+    label { display: block; font-weight: 600; font-size: .92rem; margin-top: 12px; }
+    input, textarea { width: 100%; margin-top: 4px; border: 1px solid var(--line); border-radius: 10px; padding: 10px; font: inherit; background: var(--bg); }
+    button { margin-top: 14px; min-height: 44px; border: 0; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 700; padding: 0 16px; }
+    .remove { background: transparent; color: var(--accent); padding: 0; }
+    .note-card { margin-top: 16px; }
+    .note-card img { width: 100%; max-height: 420px; object-fit: contain; border-radius: 10px; background: #eef3f2; }
+    .muted { color: var(--muted); }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="bar">
+      <a class="brand" href="index.html">Mehedi Hasan Chaion</a>
+      <a href="index.html">Back</a>
+    </div>
+  </header>
+  <main>
+    <h1>Fabrication</h1>
+    <p class="muted">Add a photo and a note for each process you can run. Entries stay in this browser.</p>
+    <form class="card" id="form">
+      <label for="title">Title</label>
+      <input id="title" placeholder="Electrospun PVDF nanofiber mat" />
+      <label for="body">Note</label>
+      <textarea id="body" rows="4" placeholder="What the sample is, which machine you used, and what you can repeat."></textarea>
+      <label for="photo">Photo</label>
+      <input id="photo" type="file" accept="image/*" />
+      <p class="muted" id="error"></p>
+      <button type="submit">Add to the page</button>
+    </form>
+    <div id="list"></div>
+  </main>
+  <script>
+    var KEY = "chaion-fabrication";
+    function read() {
+      try { return JSON.parse(localStorage.getItem(KEY) || "[]"); } catch (e) { return []; }
+    }
+    function write(items) { localStorage.setItem(KEY, JSON.stringify(items)); }
+    function draw() {
+      var items = read();
+      var list = document.getElementById("list");
+      list.replaceChildren();
+      if (!items.length) {
+        var empty = document.createElement("p");
+        empty.className = "muted";
+        empty.textContent = "Nothing posted yet. Add one real sample photo and a short note.";
+        list.appendChild(empty);
+        return;
+      }
+      items.forEach(function (item) {
+        var card = document.createElement("article");
+        card.className = "note-card";
+        if (item.photo) {
+          var img = document.createElement("img");
+          img.src = item.photo;
+          img.alt = "";
+          card.appendChild(img);
+        }
+        if (item.title) {
+          var h = document.createElement("h2");
+          h.textContent = item.title;
+          card.appendChild(h);
+        }
+        if (item.body) {
+          var p = document.createElement("p");
+          p.textContent = item.body;
+          card.appendChild(p);
+        }
+        var button = document.createElement("button");
+        button.className = "remove";
+        button.type = "button";
+        button.textContent = "Remove";
+        button.onclick = function () { write(read().filter(function (row) { return row.id !== item.id; })); draw(); };
+        card.appendChild(button);
+        list.appendChild(card);
+      });
+    }
+    function shrink(file) {
+      return new Promise(function (resolve, reject) {
+        var reader = new FileReader();
+        reader.onerror = function () { reject(new Error("Could not read that file.")); };
+        reader.onload = function () {
+          var image = new Image();
+          image.onload = function () {
+            var scale = Math.min(1, 1400 / Math.max(image.width, image.height));
+            var canvas = document.createElement("canvas");
+            canvas.width = Math.round(image.width * scale);
+            canvas.height = Math.round(image.height * scale);
+            canvas.getContext("2d").drawImage(image, 0, 0, canvas.width, canvas.height);
+            resolve(canvas.toDataURL("image/jpeg", 0.82));
+          };
+          image.onerror = function () { reject(new Error("That file is not a readable image.")); };
+          image.src = String(reader.result);
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+    document.getElementById("form").onsubmit = function (event) {
+      event.preventDefault();
+      var title = document.getElementById("title").value.trim();
+      var body = document.getElementById("body").value.trim();
+      var file = document.getElementById("photo").files[0];
+      var error = document.getElementById("error");
+      error.textContent = "";
+      var finish = function (photo) {
+        if (!title && !body && !photo) { error.textContent = "Add a note or a photo."; return; }
+        var items = read();
+        items.unshift({ id: String(Date.now()), title: title, body: body, photo: photo || "" });
+        write(items);
+        event.target.reset();
+        draw();
+      };
+      if (!file) finish("");
+      else shrink(file).then(finish).catch(function (reason) { error.textContent = reason.message; });
+    };
+    draw();
+  </script>
+</body>
+</html>
