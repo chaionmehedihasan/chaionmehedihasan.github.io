@@ -103,7 +103,7 @@
   function removeButton(onClick) {
     var button = document.createElement("button");
     button.type = "button";
-    button.className = "text-button";
+    button.className = "text-button remove-entry";
     button.textContent = "Remove";
     button.onclick = onClick;
     return button;
@@ -117,7 +117,7 @@
     list.querySelectorAll("[data-fixed]").forEach(function (row) {
       var id = row.getAttribute("data-fixed");
       row.hidden = hidden.indexOf(id) !== -1;
-      var old = row.querySelector(".text-button");
+      var old = row.querySelector(".remove-entry");
       if (old) old.remove();
       if (signedIn() && !row.hidden) {
         row.appendChild(removeButton(function () {
@@ -128,7 +128,15 @@
         }));
       }
     });
-    savedPositions().slice().reverse().forEach(function (item) {
+      list.querySelectorAll(".more-toggle").forEach(function (more) {
+        var detail = more.nextElementSibling;
+        more.onclick = function () {
+          if (!detail) return;
+          detail.hidden = !detail.hidden;
+          more.textContent = detail.hidden ? "More" : "Less";
+        };
+      });
+      savedPositions().slice().reverse().forEach(function (item) {
       var row = document.createElement("li");
       row.setAttribute("data-added", item.id);
       var when = document.createElement("div");
@@ -141,8 +149,8 @@
       when.textContent = line;
       var title = document.createElement("strong");
       title.textContent = item.title || "";
-      row.appendChild(when);
       row.appendChild(title);
+      row.appendChild(when);
       var duties = item.duties || item.body || "";
       if (duties) {
         var more = document.createElement("button");

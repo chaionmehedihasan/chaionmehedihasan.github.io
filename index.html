@@ -81,7 +81,7 @@
     .timeline li { position: relative; padding: 0 0 22px 20px; border-left: 2px solid var(--line); }
     .timeline li:last-child { padding-bottom: 0; }
     .timeline li::before { content: ""; position: absolute; left: -6px; top: 7px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
-    .when { font-size: 0.82rem; color: var(--muted); font-weight: 600; }
+    .timeline strong { display: block; }
     .lede { margin-top: 14px; color: var(--muted); max-width: 62ch; }
     #position-form { margin: 16px 0 22px; }
     #position-form #more-fields { background: transparent; color: var(--accent); border: 0; padding: 0; margin-top: 12px; }
@@ -255,10 +255,10 @@
     <section id="experience">
       <h2>Education and experience</h2>
       <form id="position-form" class="card composer" hidden>
+        <label>Position <input name="title" placeholder="Integrated M.S.–Ph.D. student" /></label>
         <label>Start date <input name="start" placeholder="2025" /></label>
         <label>End date <input name="end" placeholder="Present" /></label>
         <label>Location <input name="location" placeholder="Seoul" /></label>
-        <label>Position <input name="title" placeholder="Researcher" /></label>
         <button type="button" id="more-fields">More</button>
         <div id="duty-fields" hidden>
           <label>Responsibilities <textarea name="duties" rows="4" placeholder="What you did in this role."></textarea></label>
@@ -268,23 +268,28 @@
       </form>
       <ul class="timeline" id="timeline">
         <li data-fixed="phd">
-          <div class="when">2025 – present · Seoul</div>
-          <strong>Integrated M.S.–Ph.D., Electronic Engineering</strong><br />
-          ASER Lab, Kwangwoon University. Energy harvesting, flexible electronics, self-powered and wearable sensors, smart textiles.
+          <strong>Integrated M.S.–Ph.D. student, Electronic Engineering</strong>
+          <div class="when">2025 – present · Seoul · ASER Lab, Kwangwoon University</div>
+          <button type="button" class="more-toggle text-button">More</button>
+          <p hidden>I make polymer nanofibers and films for wearable, self-powered sensors and smart textiles, then measure charge and current under a controlled mechanical test. The work is triboelectric energy harvesting and flexible electronics. I also work beside the physical-sensor and biosensor members of ASER Lab.</p>
         </li>
         <li data-fixed="oxfam">
-          <div class="when">2024 · Dhaka</div>
-          <strong>JUST Energy Transition Champion Fellow</strong><br />
-          Oxfam in Bangladesh. Independent research fellowship for young researchers.
+          <strong>JUST Energy Transition Champion Fellow</strong>
+          <div class="when">2024 · Dhaka · Oxfam in Bangladesh</div>
+          <button type="button" class="more-toggle text-button">More</button>
+          <p hidden>Independent research fellowship for young researchers, held with Oxfam in Bangladesh.</p>
         </li>
         <li data-fixed="alliance">
-          <div class="when">2023 · Dhaka</div>
           <strong>Executive, Alliance Knit Composite</strong>
+          <div class="when">2023 · Dhaka</div>
+          <button type="button" class="more-toggle text-button">More</button>
+          <p hidden>First role after the textile engineering degree, at a knit-composite manufacturer in Dhaka.</p>
         </li>
         <li data-fixed="bsc">
-          <div class="when">2018 – 2023 · Jashore</div>
-          <strong>B.Sc. Textile Engineering</strong><br />
-          Jashore University of Science and Technology (JUST).
+          <strong>B.Sc. Textile Engineering</strong>
+          <div class="when">2018 – 2023 · Jashore · Jashore University of Science and Technology</div>
+          <button type="button" class="more-toggle text-button">More</button>
+          <p hidden>Fiber, yarn, and fabric structure. Multifunctional textile coatings, including conductive, antibacterial, and flame-retardant finishes, and polymer nanocomposite processing. This is the base I use for smart textiles.</p>
         </li>
       </ul>
     </section>
