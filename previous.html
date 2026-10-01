@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Current research | Mehedi Hasan Chaion</title>
+  <title>Previous research | Mehedi Hasan Chaion</title>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&display=swap" rel="stylesheet" />
   <style>
     :root { --ink:#1c2430; --muted:#5b6573; --line:#e4e8ee; --bg:#f7f5f1; --card:#fff; --accent:#0f5c5c; }
@@ -39,8 +39,8 @@
     </div>
   </header>
   <main>
-    <h1>Current research</h1>
-    <p class="muted">Add the project title, the objectives, and the images. When there is more than one image, they shift on their own.</p>
+    <h1>Previous research</h1>
+    <p class="muted">Earlier projects. Sign in with chaionjust@gmail.com to add one. The home page slides through all of them.</p>
     <form class="card" id="signin">
       <label for="email">Email</label>
       <input id="email" type="text" inputmode="email" value="chaionjust@gmail.com" />
@@ -57,13 +57,13 @@
       <p class="error" id="error"></p>
       <button type="submit">Add this project</button>
     </form>
-    <p id="project-count" class="muted">0 projects running</p>
+    <p id="project-count" class="muted">0 previous projects</p>
     <ul id="project-names" class="names"></ul>
     <div id="detail"></div>
   </main>
   <script src="projects.js"></script>
   <script>
-    var KEY = "chaion-research";
+    var KEY = "chaion-previous";
     function signedIn() {
       try { return sessionStorage.getItem("chaion-owner") === "1"; } catch (e) { return false; }
     }
@@ -119,12 +119,12 @@
       return frame;
     }
     function draw() {
-      window.chaionProjects().then(function (items) {
+      window.chaionPrevious().then(function (items) {
         var count = document.getElementById("project-count");
         var names = document.getElementById("project-names");
         var detail = document.getElementById("detail");
         var total = items.length;
-        count.textContent = total === 1 ? "1 project running" : total + " projects running";
+        count.textContent = total === 1 ? "1 previous project" : total + " previous projects";
         names.replaceChildren();
         detail.replaceChildren();
         if (!total) {

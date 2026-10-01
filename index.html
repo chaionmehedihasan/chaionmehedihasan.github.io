@@ -96,7 +96,9 @@
     .post { background: var(--card); border: 1px solid var(--line); border-radius: 2px; padding: 14px 16px; margin-top: 12px; }
     .post img { width: 100%; max-height: 420px; object-fit: contain; border-radius: 2px; background: var(--chip); }
     .post h3 { margin-top: 10px; font-size: 1rem; font-weight: 600; }
-    .project-names { list-style: none; margin-top: 10px; }
+    .slide { display: block; margin-top: 10px; color: inherit; text-decoration: none; }
+    .slide img { width: 100%; height: 140px; object-fit: contain; background: var(--chip); }
+    .slide strong { display: block; margin-top: 8px; }
     .project-names li { padding: 4px 0; border-bottom: 1px solid var(--line); }
     .project-names li:last-child { border-bottom: 0; }
     .project-names a { font-weight: 600; }
@@ -176,17 +178,17 @@
       <div class="grid">
         <article class="card" id="current-research">
           <h3>Current research</h3>
-          <p id="project-count" class="note">Checking projects.</p>
+          <p id="project-count" class="note">0 projects running</p>
           <ul id="project-names" class="project-names"></ul>
         </article>
-        <article class="card">
-          <h3>Background that I use</h3>
-          <ul>
-            <li>Fiber, yarn, and fabric structure from textile engineering</li>
-            <li>Multifunctional textile coatings (conductive, antibacterial, flame-retardant)</li>
-            <li>Polymer nanocomposite processing</li>
-            <li>Collaboration with physical-sensor and biosensor teammates in ASER Lab</li>
-          </ul>
+        <article class="card" id="previous-research">
+          <h3>Previous research</h3>
+          <p id="previous-count" class="note">0 previous projects</p>
+          <a class="slide" id="previous-slide" href="previous.html">
+            <img id="previous-image" alt="" hidden />
+            <strong id="previous-title">No previous project yet</strong>
+          </a>
+          <p class="note"><a href="previous.html">All projects</a></p>
         </article>
       </div>
     </section>
