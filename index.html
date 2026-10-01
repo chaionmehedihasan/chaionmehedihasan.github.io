@@ -84,6 +84,7 @@
     .when { font-size: 0.82rem; color: var(--muted); font-weight: 600; }
     .lede { margin-top: 14px; color: var(--muted); max-width: 62ch; }
     #position-form { margin: 16px 0 22px; }
+    #position-form #more-fields { background: transparent; color: var(--accent); border: 0; padding: 0; margin-top: 12px; }
     .nav-signin, .composer button, #signout-button, #position-form button {
       min-height: 36px; border: 1px solid var(--accent); border-radius: 2px; background: var(--accent); color: #fff;
       font-family: "IBM Plex Sans", system-ui, sans-serif; font-weight: 500; font-size: 0.88rem; padding: 0 12px; cursor: pointer;
@@ -254,9 +255,14 @@
     <section id="experience">
       <h2>Education and experience</h2>
       <form id="position-form" class="card composer" hidden>
-        <label>When <input name="when" placeholder="2026 · Seoul" /></label>
+        <label>Start date <input name="start" placeholder="2025" /></label>
+        <label>End date <input name="end" placeholder="Present" /></label>
+        <label>Location <input name="location" placeholder="Seoul" /></label>
         <label>Position <input name="title" placeholder="Researcher" /></label>
-        <label>Note <textarea name="body" rows="3" placeholder="Where it was, and what you did."></textarea></label>
+        <button type="button" id="more-fields">More</button>
+        <div id="duty-fields" hidden>
+          <label>Responsibilities <textarea name="duties" rows="4" placeholder="What you did in this role."></textarea></label>
+        </div>
         <p class="error"></p>
         <button type="submit">Add</button>
       </form>

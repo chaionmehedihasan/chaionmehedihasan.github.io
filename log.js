@@ -133,14 +133,32 @@
       row.setAttribute("data-added", item.id);
       var when = document.createElement("div");
       when.className = "when";
-      when.textContent = item.when || "";
+      var start = item.start || "";
+      var end = item.end || "";
+      var place = item.location || "";
+      var line = item.when || [start, end].filter(Boolean).join(" – ");
+      if (!item.when && place) line = line ? line + " · " + place : place;
+      when.textContent = line;
       var title = document.createElement("strong");
       title.textContent = item.title || "";
       row.appendChild(when);
       row.appendChild(title);
-      if (item.body) {
+      var duties = item.duties || item.body || "";
+      if (duties) {
+        var more = document.createElement("button");
+        more.type = "button";
+        more.className = "text-button";
+        more.textContent = "More";
+        var detail = document.createElement("p");
+        detail.hidden = true;
+        detail.textContent = duties;
+        more.onclick = function () {
+          detail.hidden = !detail.hidden;
+          more.textContent = detail.hidden ? "More" : "Less";
+        };
         row.appendChild(document.createElement("br"));
-        row.appendChild(document.createTextNode(item.body));
+        row.appendChild(more);
+        row.appendChild(detail);
       }
       if (signedIn()) {
         row.appendChild(removeButton(function () {
@@ -226,24 +244,40 @@
     };
   }
 
+  var moreFields = document.getElementById("more-fields");
+  if (moreFields) {
+    moreFields.onclick = function () {
+      var extra = document.getElementById("duty-fields");
+      if (!extra) return;
+      extra.hidden = !extra.hidden;
+      moreFields.textContent = extra.hidden ? "More" : "Less";
+    };
+  }
+
   var positionForm = document.getElementById("position-form");
   if (positionForm) {
     positionForm.onsubmit = function (event) {
       event.preventDefault();
       if (!signedIn()) return;
-      var when = positionForm.querySelector("[name=when]").value.trim();
+      var start = positionForm.querySelector("[name=start]").value.trim();
+      var end = positionForm.querySelector("[name=end]").value.trim();
+      var location = positionForm.querySelector("[name=location]").value.trim();
       var title = positionForm.querySelector("[name=title]").value.trim();
-      var body = positionForm.querySelector("[name=body]").value.trim();
+      var duties = positionForm.querySelector("[name=duties]").value.trim();
       var error = positionForm.querySelector(".error");
-      if (!when || !title) {
-        if (error) error.textContent = "Add the time and the position.";
+      if (!start || !title) {
+        if (error) error.textContent = "Add the start date and the position.";
         return;
       }
       if (error) error.textContent = "";
       var items = savedPositions();
-      items.unshift({ id: String(Date.now()), when: when, title: title, body: body });
+      items.unshift({ id: String(Date.now()), start: start, end: end, location: location, title: title, duties: duties });
       localStorage.setItem("chaion-positions", JSON.stringify(items));
       positionForm.reset();
+      var extra = document.getElementById("duty-fields");
+      var moreFieldsButton = document.getElementById("more-fields");
+      if (extra) extra.hidden = true;
+      if (moreFieldsButton) moreFieldsButton.textContent = "More";
       drawPositions();
     };
   }
