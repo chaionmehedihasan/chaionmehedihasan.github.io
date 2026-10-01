@@ -79,7 +79,20 @@
     .timeline li:last-child { padding-bottom: 0; }
     .timeline li::before { content: ""; position: absolute; left: -6px; top: 7px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
     .when { font-size: 0.82rem; color: var(--muted); font-weight: 600; }
-    .note { margin-top: 8px; color: var(--muted); font-size: 0.92rem; }
+    .lede { margin-top: 14px; color: var(--muted); max-width: 62ch; }
+    .nav-signin, .composer button, #signout-button {
+      min-height: 40px; border: 0; border-radius: 999px; background: var(--accent); color: #fff;
+      font-weight: 700; padding: 0 14px; cursor: pointer;
+    }
+    #signout-button, .text-button { background: transparent; color: var(--accent); padding: 0; min-height: 44px; }
+    .composer label { display: block; font-weight: 600; font-size: 0.92rem; margin-top: 12px; }
+    .composer input, .composer textarea, #email {
+      width: 100%; margin-top: 4px; border: 1px solid var(--line); border-radius: 10px; padding: 10px; font: inherit; background: var(--bg);
+    }
+    .error { color: #9b2c2c; font-weight: 700; min-height: 1.4em; }
+    .post { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 16px; margin-top: 12px; }
+    .post img { width: 100%; max-height: 420px; object-fit: contain; border-radius: 10px; background: var(--chip); }
+    .post h3 { margin-top: 10px; }
     @media (max-width: 760px) {
       .hero, .grid { grid-template-columns: 1fr; }
     }
@@ -94,7 +107,10 @@
         <a href="#methods">Methods</a>
         <a href="#publications">Publications</a>
         <a href="#experience">Experience</a>
+        <a href="#research">Research</a>
+        <a href="#records">Records</a>
         <a href="#contact">Contact</a>
+        <a href="#signin-panel">Sign in</a>
       </nav>
     </div>
   </header>
@@ -133,6 +149,18 @@
       </aside>
     </div>
 
+    <section id="signin-panel">
+      <h2>Sign in</h2>
+      <p class="intro">Only chaionjust@gmail.com can add photos. The address is already filled. Press Sign in.</p>
+      <form class="card" id="signin">
+        <label for="email">Email</label>
+        <input id="email" type="text" inputmode="email" autocomplete="username" value="chaionjust@gmail.com" />
+        <p class="error" id="signin-error"></p>
+        <button type="button" id="signin-button">Sign in</button>
+      </form>
+    </section>
+    <p class="note" id="signin-status" hidden>Signed in as chaionjust@gmail.com. <button type="button" id="signout-button">Sign out</button></p>
+
     <section id="research">
       <h2>Research</h2>
       <p class="intro">
@@ -159,7 +187,7 @@
     <section id="methods">
       <h2>Methods I use</h2>
       <div class="grid">
-        <a class="card" href="fabrication.html" style="display:block;color:inherit;text-decoration:none">
+        <a class="card" href="#fabrication" style="display:block;color:inherit;text-decoration:none">
           <h3>Fabrication</h3>
           <p>Electrospinning, polymer film preparation, spin coating, thermal processing (oven / vacuum oven), electrode work including laser-induced graphene when needed.</p>
           <p class="note">Open the log</p>
@@ -177,6 +205,76 @@
           <p>Wash, stretch, and humidity tests on wearable samples — added when the experiment is closed, not as a machine list.</p>
         </article>
       </div>
+    </section>
+
+    <section id="records">
+      <h2>Records</h2>
+      <p class="intro">Sign in on this page, then add a photo and a short note in the section it belongs to. Only chaionjust@gmail.com can post.</p>
+
+      <section id="fabrication">
+        <h2>Fabrication</h2>
+        <p class="intro">Electrospinning, polymer films, spin coating, thermal processing, and electrodes.</p>
+        <form class="card composer" data-section="fabrication" hidden>
+          <label>Title <input name="title" placeholder="Electrospun PVDF nanofiber mat" /></label>
+          <label>Note <textarea name="body" rows="3" placeholder="What the sample is, and what you can repeat."></textarea></label>
+          <label>Photo <input name="photo" type="file" accept="image/*" /></label>
+          <p class="error"></p>
+          <button type="submit">Add to Fabrication</button>
+        </form>
+        <div class="board" data-section="fabrication"></div>
+      </section>
+
+      <section id="equipment">
+        <h2>Equipment</h2>
+        <p class="intro">Machines you can operate: electrospinning, SEM, FTIR, oscilloscope, electrometer, and the rest of the bench.</p>
+        <form class="card composer" data-section="equipment" hidden>
+          <label>Title <input name="title" placeholder="Scanning electron microscope" /></label>
+          <label>Note <textarea name="body" rows="3" placeholder="What you use it for."></textarea></label>
+          <label>Photo <input name="photo" type="file" accept="image/*" /></label>
+          <p class="error"></p>
+          <button type="submit">Add to Equipment</button>
+        </form>
+        <div class="board" data-section="equipment"></div>
+      </section>
+
+      <section id="school">
+        <h2>School</h2>
+        <p class="intro">Textile engineering at JUST, and the electronics courses that belong with the Ph.D.</p>
+        <form class="card composer" data-section="school" hidden>
+          <label>Title <input name="title" placeholder="Textile engineering laboratory" /></label>
+          <label>Note <textarea name="body" rows="3" placeholder="The course or the lab."></textarea></label>
+          <label>Photo <input name="photo" type="file" accept="image/*" /></label>
+          <p class="error"></p>
+          <button type="submit">Add to School</button>
+        </form>
+        <div class="board" data-section="school"></div>
+      </section>
+
+      <section id="seminar">
+        <h2>Seminar</h2>
+        <p class="intro">Group seminars, talks, and posters.</p>
+        <form class="card composer" data-section="seminar" hidden>
+          <label>Title <input name="title" placeholder="ASER group seminar" /></label>
+          <label>Note <textarea name="body" rows="3" placeholder="The title of the talk and the date."></textarea></label>
+          <label>Photo <input name="photo" type="file" accept="image/*" /></label>
+          <p class="error"></p>
+          <button type="submit">Add to Seminar</button>
+        </form>
+        <div class="board" data-section="seminar"></div>
+      </section>
+
+      <section id="projects">
+        <h2>Projects</h2>
+        <p class="intro">Device and textile projects, including work that is not a paper yet.</p>
+        <form class="card composer" data-section="projects" hidden>
+          <label>Title <input name="title" placeholder="Wearable triboelectric sensor" /></label>
+          <label>Note <textarea name="body" rows="3" placeholder="What you built and what it measured."></textarea></label>
+          <label>Photo <input name="photo" type="file" accept="image/*" /></label>
+          <p class="error"></p>
+          <button type="submit">Add to Projects</button>
+        </form>
+        <div class="board" data-section="projects"></div>
+      </section>
     </section>
 
     <section id="publications">
@@ -329,5 +427,6 @@
     }
     fetch("scholar.json", { cache: "no-store" }).then(function (response) { return response.json(); }).then(renderScholar).catch(function () {});
   </script>
+  <script src="log.js"></script>
 </body>
 </html>
