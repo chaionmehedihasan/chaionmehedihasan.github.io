@@ -113,20 +113,10 @@
     var list = document.getElementById("timeline");
     if (!list) return;
     list.querySelectorAll("[data-added]").forEach(function (node) { node.remove(); });
-    var hidden = hiddenFixed();
     list.querySelectorAll("[data-fixed]").forEach(function (row) {
-      var id = row.getAttribute("data-fixed");
-      row.hidden = hidden.indexOf(id) !== -1;
+      row.hidden = false;
       var old = row.querySelector(".remove-entry");
       if (old) old.remove();
-      if (signedIn() && !row.hidden) {
-        row.appendChild(removeButton(function () {
-          var next = hiddenFixed();
-          if (next.indexOf(id) === -1) next.push(id);
-          localStorage.setItem("chaion-hidden-positions", JSON.stringify(next));
-          drawPositions();
-        }));
-      }
     });
       list.querySelectorAll(".more-toggle").forEach(function (more) {
         var detail = more.nextElementSibling;
