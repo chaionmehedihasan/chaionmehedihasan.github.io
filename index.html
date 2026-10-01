@@ -83,7 +83,7 @@
     .timeline li::before { content: ""; position: absolute; left: -6px; top: 7px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
     .when { font-size: 0.82rem; color: var(--muted); font-weight: 600; }
     .lede { margin-top: 14px; color: var(--muted); max-width: 62ch; }
-    .nav-signin, .composer button, #signout-button {
+    #position-form { margin: 16px 0 22px; }
       min-height: 36px; border: 1px solid var(--accent); border-radius: 2px; background: var(--accent); color: #fff;
       font-family: "IBM Plex Sans", system-ui, sans-serif; font-weight: 500; font-size: 0.88rem; padding: 0 12px; cursor: pointer;
     }
@@ -335,7 +335,9 @@
 
     <section id="experience">
       <h2>Education and experience</h2>
-      <form id="position-form" class="card composer" hidden>
+      <form id="position-form" class="card">
+        <p id="position-lock" class="note">Sign in here to add a position. Only chaionjust@gmail.com can do this.</p>
+        <button type="button" id="position-signin">Sign in</button>
         <label>When <input name="when" placeholder="2026 · Seoul" /></label>
         <label>Position <input name="title" placeholder="Researcher" /></label>
         <label>Note <textarea name="body" rows="3" placeholder="Where it was, and what you did."></textarea></label>

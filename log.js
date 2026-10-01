@@ -137,6 +137,10 @@
     if (panel) panel.hidden = on;
     if (status) status.hidden = !on;
     document.querySelectorAll(".composer").forEach(function (form) { form.hidden = !on; });
+    var lock = document.getElementById("position-lock");
+    var positionSign = document.getElementById("position-signin");
+    if (lock) lock.hidden = on;
+    if (positionSign) positionSign.hidden = on;
     document.querySelectorAll(".board").forEach(drawBoard);
     drawPositions();
   }
@@ -190,6 +194,14 @@
       else shrink(file).then(finish).catch(function (reason) { if (error) error.textContent = reason.message; });
     };
   });
+
+  var positionSign = document.getElementById("position-signin");
+  if (positionSign) {
+    positionSign.onclick = function () {
+      setSignedIn(true);
+      paint();
+    };
+  }
 
   var positionForm = document.getElementById("position-form");
   if (positionForm) {
