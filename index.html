@@ -81,7 +81,9 @@
     .timeline li { position: relative; padding: 0 0 22px 20px; border-left: 2px solid var(--line); }
     .timeline li:last-child { padding-bottom: 0; }
     .timeline li::before { content: ""; position: absolute; left: -6px; top: 7px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
-    .timeline strong { display: block; }
+    #timeline { list-style: none; }
+    #timeline li { border-left: 0; padding: 0; margin-top: 12px; }
+    #timeline li::before { display: none; }
     .lede { margin-top: 14px; color: var(--muted); max-width: 62ch; }
     #position-form { margin: 16px 0 22px; }
     #position-form #more-fields { background: transparent; color: var(--accent); border: 0; padding: 0; margin-top: 12px; }
@@ -262,11 +264,53 @@
 
     <section id="experience">
       <h2>Education and experience</h2>
+      <ul class="timeline" id="timeline">
+        <li class="card" data-fixed="phd">
+          <label>Position <input readonly value="Integrated M.S.–Ph.D. student, Electronic Engineering" /></label>
+          <label>Start date <input readonly value="2025" /></label>
+          <label>End date <input readonly value="Present" /></label>
+          <label>Location <input readonly value="Seoul, ASER Lab, Kwangwoon University" /></label>
+          <button type="button" class="more-toggle text-button">More</button>
+          <div hidden>
+            <label>Responsibilities <textarea readonly rows="4">I make polymer nanofibers and films for wearable, self-powered sensors and smart textiles, then measure charge and current under a controlled mechanical test. The work is triboelectric energy harvesting and flexible electronics. I also work beside the physical-sensor and biosensor members of ASER Lab.</textarea></label>
+          </div>
+        </li>
+        <li class="card" data-fixed="oxfam">
+          <label>Position <input readonly value="JUST Energy Transition Champion Fellow" /></label>
+          <label>Start date <input readonly value="2024" /></label>
+          <label>End date <input readonly value="2024" /></label>
+          <label>Location <input readonly value="Dhaka, Oxfam in Bangladesh" /></label>
+          <button type="button" class="more-toggle text-button">More</button>
+          <div hidden>
+            <label>Responsibilities <textarea readonly rows="3">Independent research fellowship for young researchers, held with Oxfam in Bangladesh.</textarea></label>
+          </div>
+        </li>
+        <li class="card" data-fixed="alliance">
+          <label>Position <input readonly value="Executive, Alliance Knit Composite" /></label>
+          <label>Start date <input readonly value="2023" /></label>
+          <label>End date <input readonly value="2023" /></label>
+          <label>Location <input readonly value="Dhaka" /></label>
+          <button type="button" class="more-toggle text-button">More</button>
+          <div hidden>
+            <label>Responsibilities <textarea readonly rows="3">First role after the textile engineering degree, at a knit-composite manufacturer in Dhaka.</textarea></label>
+          </div>
+        </li>
+        <li class="card" data-fixed="bsc">
+          <label>Position <input readonly value="B.Sc. Textile Engineering" /></label>
+          <label>Start date <input readonly value="2018" /></label>
+          <label>End date <input readonly value="2023" /></label>
+          <label>Location <input readonly value="Jashore, Jashore University of Science and Technology" /></label>
+          <button type="button" class="more-toggle text-button">More</button>
+          <div hidden>
+            <label>Responsibilities <textarea readonly rows="4">Fiber, yarn, and fabric structure. Multifunctional textile coatings, including conductive, antibacterial, and flame-retardant finishes, and polymer nanocomposite processing. This is the base I use for smart textiles.</textarea></label>
+          </div>
+        </li>
+      </ul>
       <form id="position-form" class="card composer" hidden>
-        <label>Position <input name="title" placeholder="Integrated M.S.–Ph.D. student" /></label>
-        <label>Start date <input name="start" placeholder="2025" /></label>
-        <label>End date <input name="end" placeholder="Present" /></label>
-        <label>Location <input name="location" placeholder="Seoul" /></label>
+        <label>Position <input name="title" placeholder="New position" /></label>
+        <label>Start date <input name="start" placeholder="Year" /></label>
+        <label>End date <input name="end" placeholder="Year or Present" /></label>
+        <label>Location <input name="location" placeholder="City" /></label>
         <button type="button" id="more-fields">More</button>
         <div id="duty-fields" hidden>
           <label>Responsibilities <textarea name="duties" rows="4" placeholder="What you did in this role."></textarea></label>
@@ -274,32 +318,6 @@
         <p class="error"></p>
         <button type="submit">Add</button>
       </form>
-      <ul class="timeline" id="timeline">
-        <li data-fixed="phd">
-          <strong>Integrated M.S.–Ph.D. student, Electronic Engineering</strong>
-          <div class="when">2025 – present · Seoul · ASER Lab, Kwangwoon University</div>
-          <button type="button" class="more-toggle text-button">More</button>
-          <p hidden>I make polymer nanofibers and films for wearable, self-powered sensors and smart textiles, then measure charge and current under a controlled mechanical test. The work is triboelectric energy harvesting and flexible electronics. I also work beside the physical-sensor and biosensor members of ASER Lab.</p>
-        </li>
-        <li data-fixed="oxfam">
-          <strong>JUST Energy Transition Champion Fellow</strong>
-          <div class="when">2024 · Dhaka · Oxfam in Bangladesh</div>
-          <button type="button" class="more-toggle text-button">More</button>
-          <p hidden>Independent research fellowship for young researchers, held with Oxfam in Bangladesh.</p>
-        </li>
-        <li data-fixed="alliance">
-          <strong>Executive, Alliance Knit Composite</strong>
-          <div class="when">2023 · Dhaka</div>
-          <button type="button" class="more-toggle text-button">More</button>
-          <p hidden>First role after the textile engineering degree, at a knit-composite manufacturer in Dhaka.</p>
-        </li>
-        <li data-fixed="bsc">
-          <strong>B.Sc. Textile Engineering</strong>
-          <div class="when">2018 – 2023 · Jashore · Jashore University of Science and Technology</div>
-          <button type="button" class="more-toggle text-button">More</button>
-          <p hidden>Fiber, yarn, and fabric structure. Multifunctional textile coatings, including conductive, antibacterial, and flame-retardant finishes, and polymer nanocomposite processing. This is the base I use for smart textiles.</p>
-        </li>
-      </ul>
     </section>
 
     <section id="contact">
