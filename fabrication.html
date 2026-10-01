@@ -23,7 +23,7 @@
     .remove { background: transparent; color: var(--accent); padding: 0; }
     .note-card { margin-top: 16px; }
     .note-card img { width: 100%; max-height: 420px; object-fit: contain; border-radius: 10px; background: #eef3f2; }
-    .muted { color: var(--muted); }
+    .error { color: #9b2c2c; font-weight: 700; min-height: 1.4em; }
   </style>
 </head>
 <body>
@@ -38,9 +38,9 @@
     <p class="muted">The form stays hidden until you sign in with your email. A visitor who is not signed in cannot add a photo.</p>
     <form class="card" id="signin">
       <label for="email">Email</label>
-      <input id="email" type="email" autocomplete="username" placeholder="chaionjust@gmail.com" />
-      <p class="muted" id="signin-error"></p>
-      <button type="submit">Sign in</button>
+      <input id="email" type="text" inputmode="email" autocomplete="username" value="chaionjust@gmail.com" />
+      <p class="error" id="signin-error"></p>
+      <button type="button" id="signin-button">Sign in</button>
     </form>
     <form class="card" id="form" hidden>
       <label for="title">Title</label>
@@ -119,21 +119,22 @@
         reader.readAsDataURL(file);
       });
     }
-    document.getElementById("signin").onsubmit = function (event) {
-      event.preventDefault();
-      var email = document.getElementById("email").value.trim().toLowerCase();
-      if (email !== "chaionjust@gmail.com") {
-        document.getElementById("signin-error").textContent = "That email cannot post.";
-        return;
-      }
-      sessionStorage.setItem("chaion-owner", "1");
-      document.getElementById("signin").hidden = true;
-      document.getElementById("form").hidden = false;
-    };
-    if (sessionStorage.getItem("chaion-owner") === "1") {
+    function unlock() {
+      try { sessionStorage.setItem("chaion-owner", "1"); } catch (e) {}
       document.getElementById("signin").hidden = true;
       document.getElementById("form").hidden = false;
     }
+    document.getElementById("signin-button").onclick = function () {
+      var email = document.getElementById("email").value.trim().toLowerCase();
+      if (email !== "chaionjust@gmail.com") {
+        document.getElementById("signin-error").textContent = "Use chaionjust@gmail.com, then press Sign in again.";
+        return;
+      }
+      unlock();
+    };
+    var already = false;
+    try { already = sessionStorage.getItem("chaion-owner") === "1"; } catch (e) {}
+    if (already) unlock();
     document.getElementById("form").onsubmit = function (event) {
       event.preventDefault();
       var title = document.getElementById("title").value.trim();
