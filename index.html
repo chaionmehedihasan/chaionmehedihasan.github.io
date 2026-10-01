@@ -335,7 +335,14 @@
 
     <section id="experience">
       <h2>Education and experience</h2>
-      <ul class="timeline">
+      <form id="position-form" class="card composer" hidden>
+        <label>When <input name="when" placeholder="2026 · Seoul" /></label>
+        <label>Position <input name="title" placeholder="Researcher" /></label>
+        <label>Note <textarea name="body" rows="3" placeholder="Where it was, and what you did."></textarea></label>
+        <p class="error"></p>
+        <button type="submit">Add this position</button>
+      </form>
+      <ul class="timeline" id="timeline">
         <li>
           <div class="when">2025 – present · Seoul</div>
           <strong>Integrated M.S.–Ph.D., Electronic Engineering</strong><br />

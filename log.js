@@ -92,6 +92,44 @@
     });
   }
 
+  function savedPositions() {
+    try { return JSON.parse(localStorage.getItem("chaion-positions") || "[]"); } catch (e) { return []; }
+  }
+
+  function drawPositions() {
+    var list = document.getElementById("timeline");
+    if (!list) return;
+    list.querySelectorAll("[data-added]").forEach(function (node) { node.remove(); });
+    savedPositions().slice().reverse().forEach(function (item) {
+      var row = document.createElement("li");
+      row.setAttribute("data-added", item.id);
+      var when = document.createElement("div");
+      when.className = "when";
+      when.textContent = item.when || "";
+      var title = document.createElement("strong");
+      title.textContent = item.title || "";
+      row.appendChild(when);
+      row.appendChild(title);
+      if (item.body) {
+        row.appendChild(document.createElement("br"));
+        row.appendChild(document.createTextNode(item.body));
+      }
+      if (signedIn()) {
+        var button = document.createElement("button");
+        button.type = "button";
+        button.className = "text-button";
+        button.textContent = "Remove";
+        row.appendChild(button);
+        button.onclick = function () {
+          var next = savedPositions().filter(function (saved) { return saved.id !== item.id; });
+          localStorage.setItem("chaion-positions", JSON.stringify(next));
+          drawPositions();
+        };
+      }
+      list.insertBefore(row, list.firstChild);
+    });
+  }
+
   function paint() {
     var on = signedIn();
     var panel = document.getElementById("signin-panel");
@@ -100,6 +138,7 @@
     if (status) status.hidden = !on;
     document.querySelectorAll(".composer").forEach(function (form) { form.hidden = !on; });
     document.querySelectorAll(".board").forEach(drawBoard);
+    drawPositions();
   }
 
   var button = document.getElementById("signin-button");
@@ -126,6 +165,7 @@
   }
 
   document.querySelectorAll(".composer").forEach(function (form) {
+    if (form.id === "position-form") return;
     form.onsubmit = function (event) {
       event.preventDefault();
       if (!signedIn()) return;
@@ -150,6 +190,28 @@
       else shrink(file).then(finish).catch(function (reason) { if (error) error.textContent = reason.message; });
     };
   });
+
+  var positionForm = document.getElementById("position-form");
+  if (positionForm) {
+    positionForm.onsubmit = function (event) {
+      event.preventDefault();
+      if (!signedIn()) return;
+      var when = positionForm.querySelector("[name=when]").value.trim();
+      var title = positionForm.querySelector("[name=title]").value.trim();
+      var body = positionForm.querySelector("[name=body]").value.trim();
+      var error = positionForm.querySelector(".error");
+      if (!when || !title) {
+        if (error) error.textContent = "Add the time and the position.";
+        return;
+      }
+      if (error) error.textContent = "";
+      var items = savedPositions();
+      items.unshift({ id: String(Date.now()), when: when, title: title, body: body });
+      localStorage.setItem("chaion-positions", JSON.stringify(items));
+      positionForm.reset();
+      drawPositions();
+    };
+  }
 
   paint();
 })();
