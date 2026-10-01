@@ -71,6 +71,7 @@
     .card h3 { font-size: 1.02rem; margin-bottom: 6px; }
     .card p, .card li { color: var(--muted); font-size: 0.95rem; }
     .card ul { padding-left: 18px; }
+    .year { margin: 22px 0 2px; font-family: "IBM Plex Sans", sans-serif; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
     .pub { padding: 14px 0; border-bottom: 1px solid var(--line); }
     .pub a.title { font-weight: 600; color: var(--ink); display: block; text-decoration: none; }
     .pub a.title:hover { text-decoration: underline; }
@@ -390,7 +391,22 @@
       const list = document.getElementById("paper-list");
       if (!list) return;
       list.replaceChildren();
+      var groups = {};
       data.papers.forEach(function (paper) {
+        var year = text(paper.year);
+        if (!/^\d{4}$/.test(year)) {
+          var found = text(paper.venue).match(/\b(19|20)\d{2}\b/g);
+          year = found ? found[found.length - 1] : "Undated";
+        }
+        if (!groups[year]) groups[year] = [];
+        groups[year].push(paper);
+      });
+      Object.keys(groups).sort(function (a, b) { return Number(b) - Number(a); }).forEach(function (year) {
+        var heading = document.createElement("h3");
+        heading.className = "year";
+        heading.textContent = year;
+        list.appendChild(heading);
+        groups[year].forEach(function (paper) {
         const wrap = document.createElement("div");
         wrap.className = "pub";
         const link = document.createElement("a");
@@ -429,6 +445,7 @@
           wrap.appendChild(links);
         }
         list.appendChild(wrap);
+        });
       });
     }
     fetch("scholar.json", { cache: "no-store" }).then(function (response) { return response.json(); }).then(renderScholar).catch(function () {});
