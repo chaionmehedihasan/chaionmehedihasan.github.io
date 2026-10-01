@@ -26,7 +26,9 @@
     .frame { overflow: hidden; margin-top: 12px; background: #eef3f2; }
     .track { display: flex; transition: transform 0.7s ease; }
     .track img { width: 100%; height: 320px; object-fit: contain; flex: none; }
-    .count { font-size: 0.78rem; color: var(--muted); margin-top: 6px; }
+    .names { list-style: none; padding: 0; }
+    .names li { padding: 8px 0; border-bottom: 1px solid var(--line); }
+    .names a { font-weight: 600; text-decoration: none; }
   </style>
 </head>
 <body>
@@ -55,8 +57,11 @@
       <p class="error" id="error"></p>
       <button type="submit">Add this project</button>
     </form>
-    <div id="list"></div>
+    <p id="project-count" class="muted">Checking projects.</p>
+    <ul id="project-names" class="names"></ul>
+    <div id="detail"></div>
   </main>
+  <script src="projects.js"></script>
   <script>
     var KEY = "chaion-research";
     function signedIn() {
@@ -114,43 +119,70 @@
       return frame;
     }
     function draw() {
-      var list = document.getElementById("list");
-      var items = read();
-      list.replaceChildren();
-      if (!items.length) {
-        var empty = document.createElement("p");
-        empty.className = "muted";
-        empty.textContent = "No project posted yet.";
-        list.appendChild(empty);
-        return;
-      }
-      items.forEach(function (item) {
-        var card = document.createElement("article");
-        card.className = "project";
-        var heading = document.createElement("h2");
-        heading.textContent = item.title;
-        card.appendChild(heading);
-        if (item.objectives) {
-          var text = document.createElement("p");
-          text.textContent = item.objectives;
-          card.appendChild(text);
+      window.chaionProjects().then(function (items) {
+        var count = document.getElementById("project-count");
+        var names = document.getElementById("project-names");
+        var detail = document.getElementById("detail");
+        var total = items.length;
+        count.textContent = total === 1 ? "1 project running" : total + " projects running";
+        names.replaceChildren();
+        detail.replaceChildren();
+        if (!total) {
+          var empty = document.createElement("p");
+          empty.className = "muted";
+          empty.textContent = "No project posted yet.";
+          detail.appendChild(empty);
+          return;
         }
-        var images = (item.images || []).filter(function (src) { return String(src).indexOf("data:image/") === 0; });
-        var frame = rotator(images);
-        if (frame) card.appendChild(frame);
-        if (signedIn()) {
-          var button = document.createElement("button");
-          button.type = "button";
-          button.className = "text";
-          button.textContent = "Remove";
-          button.onclick = function () {
-            write(read().filter(function (row) { return row.id !== item.id; }));
-            draw();
+        items.forEach(function (item) {
+          var row = document.createElement("li");
+          var link = document.createElement("a");
+          link.href = "#" + encodeURIComponent(item.id);
+          link.textContent = item.title || "Untitled project";
+          link.onclick = function (event) {
+            event.preventDefault();
+            location.hash = encodeURIComponent(item.id);
+            show(items, item.id);
           };
-          card.appendChild(button);
-        }
-        list.appendChild(card);
+          row.appendChild(link);
+          names.appendChild(row);
+        });
+        var selected = decodeURIComponent((location.hash || "").slice(1));
+        show(items, selected || items[0].id);
       });
+    }
+    function show(items, id) {
+      var detail = document.getElementById("detail");
+      var item = null;
+      items.forEach(function (row) { if (String(row.id) === String(id)) item = row; });
+      detail.replaceChildren();
+      if (!item) return;
+      var card = document.createElement("article");
+      card.className = "project";
+      var heading = document.createElement("h2");
+      heading.textContent = item.title || "Untitled project";
+      card.appendChild(heading);
+      if (item.objectives) {
+        var text = document.createElement("p");
+        text.textContent = item.objectives;
+        card.appendChild(text);
+      }
+      var images = (item.images || []).filter(function (src) { return String(src).indexOf("data:image/") === 0; });
+      var frame = rotator(images);
+      if (frame) card.appendChild(frame);
+      if (signedIn()) {
+        var button = document.createElement("button");
+        button.type = "button";
+        button.className = "text";
+        button.textContent = "Remove";
+        button.onclick = function () {
+          write(read().filter(function (row) { return String(row.id) !== String(item.id); }));
+          location.hash = "";
+          draw();
+        };
+        card.appendChild(button);
+      }
+      detail.appendChild(card);
     }
     function unlock() {
       document.getElementById("signin").hidden = true;

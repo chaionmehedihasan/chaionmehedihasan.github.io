@@ -100,6 +100,33 @@
     if (status) status.hidden = !on;
     document.querySelectorAll(".composer").forEach(function (form) { form.hidden = !on; });
     document.querySelectorAll(".board").forEach(drawBoard);
+    if (window.chaionProjects && document.getElementById("project-count")) {
+      window.chaionProjects().then(function (items) {
+        var count = document.getElementById("project-count");
+        var names = document.getElementById("project-names");
+        if (!count || !names) return;
+        var total = items.length;
+        count.textContent = total === 1 ? "1 project running" : total + " projects running";
+        names.replaceChildren();
+        if (!total) {
+          var empty = document.createElement("li");
+          var link = document.createElement("a");
+          link.href = "research.html";
+          link.textContent = "Details";
+          empty.appendChild(link);
+          names.appendChild(empty);
+          return;
+        }
+        items.forEach(function (item) {
+          var row = document.createElement("li");
+          var link = document.createElement("a");
+          link.href = "research.html#" + encodeURIComponent(item.id);
+          link.textContent = item.title || "Untitled project";
+          row.appendChild(link);
+          names.appendChild(row);
+        });
+      });
+    }
   }
 
   var button = document.getElementById("signin-button");

@@ -95,7 +95,10 @@
     .post { background: var(--card); border: 1px solid var(--line); border-radius: 2px; padding: 14px 16px; margin-top: 12px; }
     .post img { width: 100%; max-height: 420px; object-fit: contain; border-radius: 2px; background: var(--chip); }
     .post h3 { margin-top: 10px; font-size: 1rem; font-weight: 600; }
-    #scholar-stats { font-variant-numeric: tabular-nums; }
+    .project-names { list-style: none; margin-top: 10px; }
+    .project-names li { padding: 4px 0; border-bottom: 1px solid var(--line); }
+    .project-names li:last-child { border-bottom: 0; }
+    .project-names a { font-weight: 600; }
     @media (max-width: 760px) {
       .hero, .grid { grid-template-columns: 1fr; }
     }
@@ -170,11 +173,11 @@
         This profile is aimed at R&D jobs after the Ph.D.: wearable electronic materials, functional polymers, triboelectric devices, and smart textiles, in a company or a research institute. I take a layer from fabrication through a controlled mechanical test to charge and current. That is a materials-and-device role, not silicon process engineering and not a conventional textile mill.
       </p>
       <div class="grid">
-        <a class="card" href="research.html" style="display:block;color:inherit;text-decoration:none">
+        <article class="card" id="current-research">
           <h3>Current research</h3>
-          <p>Wearable, self-powered sensors at ASER Lab. Open this card to add the project title, the objectives, and the images.</p>
-          <p class="note">Open</p>
-        </a>
+          <p id="project-count" class="note">Checking projects.</p>
+          <ul id="project-names" class="project-names"></ul>
+        </article>
         <article class="card">
           <h3>Background that I use</h3>
           <ul>
@@ -430,6 +433,7 @@
     }
     fetch("scholar.json", { cache: "no-store" }).then(function (response) { return response.json(); }).then(renderScholar).catch(function () {});
   </script>
+  <script src="projects.js"></script>
   <script src="log.js"></script>
 </body>
 </html>
