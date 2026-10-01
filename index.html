@@ -82,13 +82,13 @@
     .timeline li:last-child { padding-bottom: 0; }
     .timeline li::before { content: ""; position: absolute; left: -6px; top: 7px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
     #timeline { list-style: none; border-top: 1px solid var(--line); }
-    #timeline li { display: grid; grid-template-columns: 132px 1fr; gap: 8px 28px; border-left: 0; padding: 22px 0; margin: 0; border-bottom: 1px solid var(--line); background: transparent; }
+    #timeline li { display: grid; grid-template-columns: 108px 1fr; gap: 2px 20px; align-items: baseline; border-left: 0; padding: 11px 0; margin: 0; border-bottom: 1px solid var(--line); background: transparent; }
     #timeline li::before { display: none; }
-    .role-when { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 500; padding-top: 4px; }
-    .role-body strong { display: block; font-family: "IBM Plex Serif", Georgia, serif; font-size: 1.15rem; font-weight: 600; letter-spacing: -0.01em; }
-    .role-place { margin: 4px 0 0; color: var(--muted); }
-    .role-duty { margin: 10px 0 0; max-width: 62ch; }
-    #timeline .more-toggle { display: inline-block; margin-top: 8px; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; min-height: 0; }
+    .role-when { font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+    .role-body strong { font-family: "IBM Plex Serif", Georgia, serif; font-size: 1.02rem; font-weight: 600; }
+    .role-place { color: var(--muted); font-weight: 400; font-family: "IBM Plex Sans", system-ui, sans-serif; font-size: 0.92rem; }
+    .role-duty { margin: 6px 0 0; max-width: 68ch; font-size: 0.92rem; }
+    #timeline .more-toggle { display: inline; margin: 0 0 0 10px; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; min-height: 0; }
     .lede { margin-top: 14px; color: var(--muted); max-width: 62ch; }
     #position-form { margin: 16px 0 22px; }
     #position-form #more-fields { background: transparent; color: var(--accent); border: 0; padding: 0; margin-top: 12px; }
@@ -273,7 +273,7 @@
           <div class="role-when">2025 — Present</div>
           <div class="role-body">
             <strong>Integrated M.S.–Ph.D. student, Electronic Engineering</strong>
-            <p class="role-place">ASER Lab, Kwangwoon University · Seoul</p>
+            <span class="role-place"> · ASER Lab, Kwangwoon University, Seoul</span>
             <button type="button" class="more-toggle text-button">More</button>
             <p class="role-duty" hidden>I make polymer nanofibers and films for wearable, self-powered sensors and smart textiles, then measure charge and current under a controlled mechanical test. The work is triboelectric energy harvesting and flexible electronics. I also work beside the physical-sensor and biosensor members of ASER Lab.</p>
           </div>
@@ -282,7 +282,7 @@
           <div class="role-when">2024</div>
           <div class="role-body">
             <strong>JUST Energy Transition Champion Fellow</strong>
-            <p class="role-place">Oxfam in Bangladesh · Dhaka</p>
+            <span class="role-place"> · Oxfam in Bangladesh, Dhaka</span>
             <button type="button" class="more-toggle text-button">More</button>
             <p class="role-duty" hidden>Independent research fellowship for young researchers, held with Oxfam in Bangladesh.</p>
           </div>
@@ -291,7 +291,7 @@
           <div class="role-when">2023</div>
           <div class="role-body">
             <strong>Executive, Alliance Knit Composite</strong>
-            <p class="role-place">Dhaka</p>
+            <span class="role-place"> · Dhaka</span>
             <button type="button" class="more-toggle text-button">More</button>
             <p class="role-duty" hidden>First role after the textile engineering degree, at a knit-composite manufacturer in Dhaka.</p>
           </div>
@@ -300,7 +300,7 @@
           <div class="role-when">2018 — 2023</div>
           <div class="role-body">
             <strong>B.Sc. Textile Engineering</strong>
-            <p class="role-place">Jashore University of Science and Technology · Jashore</p>
+            <span class="role-place"> · JUST, Jashore</span>
             <button type="button" class="more-toggle text-button">More</button>
             <p class="role-duty" hidden>Fiber, yarn, and fabric structure. Multifunctional textile coatings, including conductive, antibacterial, and flame-retardant finishes, and polymer nanocomposite processing. This is the base I use for smart textiles.</p>
           </div>

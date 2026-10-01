@@ -140,9 +140,9 @@
       title.textContent = item.title || "";
       body.appendChild(title);
       if (item.location) {
-        var place = document.createElement("p");
+        var place = document.createElement("span");
         place.className = "role-place";
-        place.textContent = item.location;
+        place.textContent = " · " + item.location;
         body.appendChild(place);
       }
       var duties = item.duties || item.body || "";
