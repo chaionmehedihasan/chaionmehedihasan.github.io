@@ -118,7 +118,6 @@
         <a href="#publications">Publications</a>
         <a href="#experience">Experience</a>
         <a href="#research">Research</a>
-        <a href="#records">Records</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
@@ -186,11 +185,10 @@
     <section id="methods">
       <h2>Methods I use</h2>
       <div class="grid">
-        <a class="card" href="#fabrication" style="display:block;color:inherit;text-decoration:none">
+        <article class="card">
           <h3>Fabrication</h3>
           <p>Electrospinning, polymer film preparation, spin coating, thermal processing (oven / vacuum oven), electrode work including laser-induced graphene when needed.</p>
-          <p class="note">Open the log</p>
-        </a>
+        </article>
         <article class="card">
           <h3>Electrical measurement</h3>
           <p>Linear motor and force-controlled tapping, oscilloscope, electrometer, transferred charge and current, LCR.</p>
@@ -204,76 +202,6 @@
           <p>Wash, stretch, and humidity tests on wearable samples — added when the experiment is closed, not as a machine list.</p>
         </article>
       </div>
-    </section>
-
-    <section id="records">
-      <h2>Records</h2>
-      <p class="intro">Notes and photos for each part of the work.</p>
-
-      <section id="fabrication">
-        <h2>Fabrication</h2>
-        <p class="intro">Electrospinning, polymer films, spin coating, thermal processing, and electrodes.</p>
-        <form class="card composer" data-section="fabrication" hidden>
-          <label>Title <input name="title" placeholder="Electrospun PVDF nanofiber mat" /></label>
-          <label>Note <textarea name="body" rows="3" placeholder="What the sample is, and what you can repeat."></textarea></label>
-          <label>Photo <input name="photo" type="file" accept="image/*" /></label>
-          <p class="error"></p>
-          <button type="submit">Add to Fabrication</button>
-        </form>
-        <div class="board" data-section="fabrication"></div>
-      </section>
-
-      <section id="equipment">
-        <h2>Equipment</h2>
-        <p class="intro">Machines you can operate: electrospinning, SEM, FTIR, oscilloscope, electrometer, and the rest of the bench.</p>
-        <form class="card composer" data-section="equipment" hidden>
-          <label>Title <input name="title" placeholder="Scanning electron microscope" /></label>
-          <label>Note <textarea name="body" rows="3" placeholder="What you use it for."></textarea></label>
-          <label>Photo <input name="photo" type="file" accept="image/*" /></label>
-          <p class="error"></p>
-          <button type="submit">Add to Equipment</button>
-        </form>
-        <div class="board" data-section="equipment"></div>
-      </section>
-
-      <section id="school">
-        <h2>School</h2>
-        <p class="intro">Textile engineering at JUST, and the electronics courses that belong with the Ph.D.</p>
-        <form class="card composer" data-section="school" hidden>
-          <label>Title <input name="title" placeholder="Textile engineering laboratory" /></label>
-          <label>Note <textarea name="body" rows="3" placeholder="The course or the lab."></textarea></label>
-          <label>Photo <input name="photo" type="file" accept="image/*" /></label>
-          <p class="error"></p>
-          <button type="submit">Add to School</button>
-        </form>
-        <div class="board" data-section="school"></div>
-      </section>
-
-      <section id="seminar">
-        <h2>Seminar</h2>
-        <p class="intro">Group seminars, talks, and posters.</p>
-        <form class="card composer" data-section="seminar" hidden>
-          <label>Title <input name="title" placeholder="ASER group seminar" /></label>
-          <label>Note <textarea name="body" rows="3" placeholder="The title of the talk and the date."></textarea></label>
-          <label>Photo <input name="photo" type="file" accept="image/*" /></label>
-          <p class="error"></p>
-          <button type="submit">Add to Seminar</button>
-        </form>
-        <div class="board" data-section="seminar"></div>
-      </section>
-
-      <section id="projects">
-        <h2>Projects</h2>
-        <p class="intro">Device and textile projects, including work that is not a paper yet.</p>
-        <form class="card composer" data-section="projects" hidden>
-          <label>Title <input name="title" placeholder="Wearable triboelectric sensor" /></label>
-          <label>Note <textarea name="body" rows="3" placeholder="What you built and what it measured."></textarea></label>
-          <label>Photo <input name="photo" type="file" accept="image/*" /></label>
-          <p class="error"></p>
-          <button type="submit">Add to Projects</button>
-        </form>
-        <div class="board" data-section="projects"></div>
-      </section>
     </section>
 
     <section id="publications">
