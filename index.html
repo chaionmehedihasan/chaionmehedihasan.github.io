@@ -82,8 +82,12 @@
     .timeline li:last-child { padding-bottom: 0; }
     .timeline li::before { content: ""; position: absolute; left: -6px; top: 7px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
     #timeline { list-style: none; }
-    #timeline li { border-left: 0; padding: 0; margin-top: 12px; }
+    #timeline li { border-left: 0; padding: 16px 18px; margin-top: 12px; }
     #timeline li::before { display: none; }
+    #timeline label { display: block; font-weight: 500; font-size: 0.82rem; margin-top: 12px; }
+    #timeline label:first-child { margin-top: 0; }
+    #timeline input, #timeline textarea { display: block; width: 100%; margin-top: 4px; border: 1px solid var(--line); border-radius: 2px; padding: 8px 10px; font: inherit; color: var(--ink); background: var(--card); }
+    #timeline .more-toggle { display: block; margin-top: 12px; }
     .lede { margin-top: 14px; color: var(--muted); max-width: 62ch; }
     #position-form { margin: 16px 0 22px; }
     #position-form #more-fields { background: transparent; color: var(--accent); border: 0; padding: 0; margin-top: 12px; }
