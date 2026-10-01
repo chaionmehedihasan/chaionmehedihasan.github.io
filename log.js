@@ -96,10 +96,38 @@
     try { return JSON.parse(localStorage.getItem("chaion-positions") || "[]"); } catch (e) { return []; }
   }
 
+  function hiddenFixed() {
+    try { return JSON.parse(localStorage.getItem("chaion-hidden-positions") || "[]"); } catch (e) { return []; }
+  }
+
+  function removeButton(onClick) {
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "text-button";
+    button.textContent = "Remove";
+    button.onclick = onClick;
+    return button;
+  }
+
   function drawPositions() {
     var list = document.getElementById("timeline");
     if (!list) return;
     list.querySelectorAll("[data-added]").forEach(function (node) { node.remove(); });
+    var hidden = hiddenFixed();
+    list.querySelectorAll("[data-fixed]").forEach(function (row) {
+      var id = row.getAttribute("data-fixed");
+      row.hidden = hidden.indexOf(id) !== -1;
+      var old = row.querySelector(".text-button");
+      if (old) old.remove();
+      if (signedIn() && !row.hidden) {
+        row.appendChild(removeButton(function () {
+          var next = hiddenFixed();
+          if (next.indexOf(id) === -1) next.push(id);
+          localStorage.setItem("chaion-hidden-positions", JSON.stringify(next));
+          drawPositions();
+        }));
+      }
+    });
     savedPositions().slice().reverse().forEach(function (item) {
       var row = document.createElement("li");
       row.setAttribute("data-added", item.id);
@@ -115,16 +143,11 @@
         row.appendChild(document.createTextNode(item.body));
       }
       if (signedIn()) {
-        var button = document.createElement("button");
-        button.type = "button";
-        button.className = "text-button";
-        button.textContent = "Remove";
-        row.appendChild(button);
-        button.onclick = function () {
+        row.appendChild(removeButton(function () {
           var next = savedPositions().filter(function (saved) { return saved.id !== item.id; });
           localStorage.setItem("chaion-positions", JSON.stringify(next));
           drawPositions();
-        };
+        }));
       }
       list.insertBefore(row, list.firstChild);
     });
