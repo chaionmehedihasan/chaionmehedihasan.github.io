@@ -130,41 +130,47 @@
       var row = document.createElement("li");
       row.setAttribute("data-added", item.id);
       var when = document.createElement("div");
-      when.className = "when";
+      when.className = "role-when";
       var start = item.start || "";
       var end = item.end || "";
-      var place = item.location || "";
-      var line = item.when || [start, end].filter(Boolean).join(" – ");
-      if (!item.when && place) line = line ? line + " · " + place : place;
-      when.textContent = line;
+      when.textContent = item.when || [start, end].filter(Boolean).join(" — ");
+      var body = document.createElement("div");
+      body.className = "role-body";
       var title = document.createElement("strong");
       title.textContent = item.title || "";
-      row.appendChild(title);
-      row.appendChild(when);
+      body.appendChild(title);
+      if (item.location) {
+        var place = document.createElement("p");
+        place.className = "role-place";
+        place.textContent = item.location;
+        body.appendChild(place);
+      }
       var duties = item.duties || item.body || "";
       if (duties) {
         var more = document.createElement("button");
         more.type = "button";
-        more.className = "text-button";
+        more.className = "more-toggle text-button";
         more.textContent = "More";
         var detail = document.createElement("p");
+        detail.className = "role-duty";
         detail.hidden = true;
         detail.textContent = duties;
         more.onclick = function () {
           detail.hidden = !detail.hidden;
           more.textContent = detail.hidden ? "More" : "Less";
         };
-        row.appendChild(document.createElement("br"));
-        row.appendChild(more);
-        row.appendChild(detail);
+        body.appendChild(more);
+        body.appendChild(detail);
       }
       if (signedIn()) {
-        row.appendChild(removeButton(function () {
+        body.appendChild(removeButton(function () {
           var next = savedPositions().filter(function (saved) { return saved.id !== item.id; });
           localStorage.setItem("chaion-positions", JSON.stringify(next));
           drawPositions();
         }));
       }
+      row.appendChild(when);
+      row.appendChild(body);
       list.insertBefore(row, list.firstChild);
     });
   }

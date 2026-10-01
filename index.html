@@ -81,13 +81,14 @@
     .timeline li { position: relative; padding: 0 0 22px 20px; border-left: 2px solid var(--line); }
     .timeline li:last-child { padding-bottom: 0; }
     .timeline li::before { content: ""; position: absolute; left: -6px; top: 7px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
-    #timeline { list-style: none; }
-    #timeline li { border-left: 0; padding: 16px 18px; margin-top: 12px; }
+    #timeline { list-style: none; border-top: 1px solid var(--line); }
+    #timeline li { display: grid; grid-template-columns: 132px 1fr; gap: 8px 28px; border-left: 0; padding: 22px 0; margin: 0; border-bottom: 1px solid var(--line); background: transparent; }
     #timeline li::before { display: none; }
-    #timeline label { display: block; font-weight: 500; font-size: 0.82rem; margin-top: 12px; }
-    #timeline label:first-child { margin-top: 0; }
-    #timeline input, #timeline textarea { display: block; width: 100%; margin-top: 4px; border: 1px solid var(--line); border-radius: 2px; padding: 8px 10px; font: inherit; color: var(--ink); background: var(--card); }
-    #timeline .more-toggle { display: block; margin-top: 12px; }
+    .role-when { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 500; padding-top: 4px; }
+    .role-body strong { display: block; font-family: "IBM Plex Serif", Georgia, serif; font-size: 1.15rem; font-weight: 600; letter-spacing: -0.01em; }
+    .role-place { margin: 4px 0 0; color: var(--muted); }
+    .role-duty { margin: 10px 0 0; max-width: 62ch; }
+    #timeline .more-toggle { display: inline-block; margin-top: 8px; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; min-height: 0; }
     .lede { margin-top: 14px; color: var(--muted); max-width: 62ch; }
     #position-form { margin: 16px 0 22px; }
     #position-form #more-fields { background: transparent; color: var(--accent); border: 0; padding: 0; margin-top: 12px; }
@@ -111,7 +112,7 @@
     .project-names li:last-child { border-bottom: 0; }
     .project-names a { font-weight: 600; }
     @media (max-width: 760px) {
-      .hero, .grid { grid-template-columns: 1fr; }
+      .hero, .grid, #timeline li { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -124,7 +125,6 @@
         <a href="#methods">Skills</a>
         <a href="#publications">Publications</a>
         <a href="#experience">Experience</a>
-        <a href="#research">Research</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
@@ -269,44 +269,40 @@
     <section id="experience">
       <h2>Education and experience</h2>
       <ul class="timeline" id="timeline">
-        <li class="card" data-fixed="phd">
-          <label>Position <input readonly value="Integrated M.S.–Ph.D. student, Electronic Engineering" /></label>
-          <label>Start date <input readonly value="2025" /></label>
-          <label>End date <input readonly value="Present" /></label>
-          <label>Location <input readonly value="Seoul, ASER Lab, Kwangwoon University" /></label>
-          <button type="button" class="more-toggle text-button">More</button>
-          <div hidden>
-            <label>Responsibilities <textarea readonly rows="4">I make polymer nanofibers and films for wearable, self-powered sensors and smart textiles, then measure charge and current under a controlled mechanical test. The work is triboelectric energy harvesting and flexible electronics. I also work beside the physical-sensor and biosensor members of ASER Lab.</textarea></label>
+        <li data-fixed="phd">
+          <div class="role-when">2025 — Present</div>
+          <div class="role-body">
+            <strong>Integrated M.S.–Ph.D. student, Electronic Engineering</strong>
+            <p class="role-place">ASER Lab, Kwangwoon University · Seoul</p>
+            <button type="button" class="more-toggle text-button">More</button>
+            <p class="role-duty" hidden>I make polymer nanofibers and films for wearable, self-powered sensors and smart textiles, then measure charge and current under a controlled mechanical test. The work is triboelectric energy harvesting and flexible electronics. I also work beside the physical-sensor and biosensor members of ASER Lab.</p>
           </div>
         </li>
-        <li class="card" data-fixed="oxfam">
-          <label>Position <input readonly value="JUST Energy Transition Champion Fellow" /></label>
-          <label>Start date <input readonly value="2024" /></label>
-          <label>End date <input readonly value="2024" /></label>
-          <label>Location <input readonly value="Dhaka, Oxfam in Bangladesh" /></label>
-          <button type="button" class="more-toggle text-button">More</button>
-          <div hidden>
-            <label>Responsibilities <textarea readonly rows="3">Independent research fellowship for young researchers, held with Oxfam in Bangladesh.</textarea></label>
+        <li data-fixed="oxfam">
+          <div class="role-when">2024</div>
+          <div class="role-body">
+            <strong>JUST Energy Transition Champion Fellow</strong>
+            <p class="role-place">Oxfam in Bangladesh · Dhaka</p>
+            <button type="button" class="more-toggle text-button">More</button>
+            <p class="role-duty" hidden>Independent research fellowship for young researchers, held with Oxfam in Bangladesh.</p>
           </div>
         </li>
-        <li class="card" data-fixed="alliance">
-          <label>Position <input readonly value="Executive, Alliance Knit Composite" /></label>
-          <label>Start date <input readonly value="2023" /></label>
-          <label>End date <input readonly value="2023" /></label>
-          <label>Location <input readonly value="Dhaka" /></label>
-          <button type="button" class="more-toggle text-button">More</button>
-          <div hidden>
-            <label>Responsibilities <textarea readonly rows="3">First role after the textile engineering degree, at a knit-composite manufacturer in Dhaka.</textarea></label>
+        <li data-fixed="alliance">
+          <div class="role-when">2023</div>
+          <div class="role-body">
+            <strong>Executive, Alliance Knit Composite</strong>
+            <p class="role-place">Dhaka</p>
+            <button type="button" class="more-toggle text-button">More</button>
+            <p class="role-duty" hidden>First role after the textile engineering degree, at a knit-composite manufacturer in Dhaka.</p>
           </div>
         </li>
-        <li class="card" data-fixed="bsc">
-          <label>Position <input readonly value="B.Sc. Textile Engineering" /></label>
-          <label>Start date <input readonly value="2018" /></label>
-          <label>End date <input readonly value="2023" /></label>
-          <label>Location <input readonly value="Jashore, Jashore University of Science and Technology" /></label>
-          <button type="button" class="more-toggle text-button">More</button>
-          <div hidden>
-            <label>Responsibilities <textarea readonly rows="4">Fiber, yarn, and fabric structure. Multifunctional textile coatings, including conductive, antibacterial, and flame-retardant finishes, and polymer nanocomposite processing. This is the base I use for smart textiles.</textarea></label>
+        <li data-fixed="bsc">
+          <div class="role-when">2018 — 2023</div>
+          <div class="role-body">
+            <strong>B.Sc. Textile Engineering</strong>
+            <p class="role-place">Jashore University of Science and Technology · Jashore</p>
+            <button type="button" class="more-toggle text-button">More</button>
+            <p class="role-duty" hidden>Fiber, yarn, and fabric structure. Multifunctional textile coatings, including conductive, antibacterial, and flame-retardant finishes, and polymer nanocomposite processing. This is the base I use for smart textiles.</p>
           </div>
         </li>
       </ul>
