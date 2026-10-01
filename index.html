@@ -84,12 +84,13 @@
     .when { font-size: 0.82rem; color: var(--muted); font-weight: 600; }
     .lede { margin-top: 14px; color: var(--muted); max-width: 62ch; }
     #position-form { margin: 16px 0 22px; }
+    .nav-signin, .composer button, #signout-button, #position-form button {
       min-height: 36px; border: 1px solid var(--accent); border-radius: 2px; background: var(--accent); color: #fff;
       font-family: "IBM Plex Sans", system-ui, sans-serif; font-weight: 500; font-size: 0.88rem; padding: 0 12px; cursor: pointer;
     }
     #signout-button, .text-button { background: transparent; color: var(--accent); padding: 0; min-height: 40px; border: 0; }
-    .composer label { display: block; font-weight: 500; font-size: 0.82rem; margin-top: 12px; letter-spacing: 0.02em; }
-    .composer input, .composer textarea, #email {
+    .composer label, #position-form label { display: block; font-weight: 500; font-size: 0.82rem; margin-top: 12px; letter-spacing: 0.02em; }
+    .composer input, .composer textarea, #email, #position-form input, #position-form textarea {
       width: 100%; margin-top: 4px; border: 1px solid var(--line); border-radius: 2px; padding: 8px 10px; font: inherit; background: var(--card);
     }
     .error { color: #9b2c2c; font-weight: 500; min-height: 1.4em; }
