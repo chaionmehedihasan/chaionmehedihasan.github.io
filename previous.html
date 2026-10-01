@@ -40,13 +40,7 @@
   </header>
   <main>
     <h1>Previous research</h1>
-    <p class="muted">Earlier projects. Sign in with chaionjust@gmail.com to add one. The home page slides through all of them.</p>
-    <form class="card" id="signin">
-      <label for="email">Email</label>
-      <input id="email" type="text" inputmode="email" value="chaionjust@gmail.com" />
-      <p class="error" id="signin-error"></p>
-      <button type="button" id="signin-button">Sign in</button>
-    </form>
+    <p class="muted">Earlier projects. The home page slides through them.</p>
     <form class="card" id="form" hidden>
       <label for="title">Project title</label>
       <input id="title" placeholder="Self-powered textile sensor" />
@@ -185,19 +179,9 @@
       detail.appendChild(card);
     }
     function unlock() {
-      document.getElementById("signin").hidden = true;
-      document.getElementById("form").hidden = false;
+      var form = document.getElementById("form");
+      if (form && signedIn()) form.hidden = false;
     }
-    document.getElementById("signin-button").onclick = function () {
-      var email = document.getElementById("email").value.trim().toLowerCase();
-      if (email !== "chaionjust@gmail.com") {
-        document.getElementById("signin-error").textContent = "Only chaionjust@gmail.com can sign in.";
-        return;
-      }
-      try { sessionStorage.setItem("chaion-owner", "1"); } catch (e) {}
-      unlock();
-      draw();
-    };
     if (signedIn()) unlock();
     document.getElementById("form").onsubmit = function (event) {
       event.preventDefault();

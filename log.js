@@ -54,7 +54,7 @@
     if (!items.length) {
       var empty = document.createElement("p");
       empty.className = "note";
-      empty.textContent = signedIn() ? "Nothing posted yet." : "Sign in to add a photo. Visitors cannot post.";
+      empty.textContent = "Nothing posted yet.";
       board.appendChild(empty);
       return;
     }

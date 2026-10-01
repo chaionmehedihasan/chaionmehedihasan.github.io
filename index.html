@@ -120,7 +120,6 @@
         <a href="#research">Research</a>
         <a href="#records">Records</a>
         <a href="#contact">Contact</a>
-        <a href="#signin-panel">Sign in</a>
       </nav>
     </div>
   </header>
@@ -159,17 +158,7 @@
       </aside>
     </div>
 
-    <section id="signin-panel">
-      <h2>Sign in</h2>
-      <p class="intro">Only chaionjust@gmail.com can add photos. The address is already filled. Press Sign in.</p>
-      <form class="card" id="signin">
-        <label for="email">Email</label>
-        <input id="email" type="text" inputmode="email" autocomplete="username" value="chaionjust@gmail.com" />
-        <p class="error" id="signin-error"></p>
-        <button type="button" id="signin-button">Sign in</button>
-      </form>
-    </section>
-    <p class="note" id="signin-status" hidden>Signed in as chaionjust@gmail.com. <button type="button" id="signout-button">Sign out</button></p>
+    <p class="note" id="signin-status" hidden>Signed in. <button type="button" id="signout-button">Sign out</button></p>
 
     <section id="research">
       <h2>Research</h2>
@@ -219,7 +208,7 @@
 
     <section id="records">
       <h2>Records</h2>
-      <p class="intro">Sign in on this page, then add a photo and a short note in the section it belongs to. Only chaionjust@gmail.com can post.</p>
+      <p class="intro">Notes and photos for each part of the work.</p>
 
       <section id="fabrication">
         <h2>Fabrication</h2>
@@ -336,9 +325,7 @@
 
     <section id="experience">
       <h2>Education and experience</h2>
-      <form id="position-form" class="card">
-        <p id="position-lock" class="note">Sign in here to add a position. Only chaionjust@gmail.com can do this.</p>
-        <button type="button" id="position-signin">Sign in</button>
+      <form id="position-form" class="card composer" hidden>
         <label>When <input name="when" placeholder="2026 · Seoul" /></label>
         <label>Position <input name="title" placeholder="Researcher" /></label>
         <label>Note <textarea name="body" rows="3" placeholder="Where it was, and what you did."></textarea></label>

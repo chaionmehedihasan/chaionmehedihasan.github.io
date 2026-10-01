@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Edit</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    body { margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif; background: #f7f5f1; color: #1c2430; }
+    main { max-width: 420px; margin: 48px auto; padding: 0 22px; }
+    label { display: block; font-size: 0.82rem; margin-top: 12px; }
+    input { width: 100%; margin-top: 4px; border: 1px solid #e4e8ee; padding: 8px 10px; font: inherit; }
+    button { margin-top: 14px; min-height: 36px; border: 1px solid #0f5c5c; background: #0f5c5c; color: #fff; font: inherit; padding: 0 12px; cursor: pointer; }
+    .error { color: #9b2c2c; min-height: 1.4em; }
+    a { color: #0f5c5c; }
+  </style>
+</head>
+<body>
+  <main>
+    <form id="signin">
+      <label for="email">Email</label>
+      <input id="email" type="text" inputmode="email" value="chaionjust@gmail.com" />
+      <p class="error" id="signin-error"></p>
+      <button type="button" id="signin-button">Sign in</button>
+    </form>
+    <p id="done" hidden>Open. <a href="index.html">Back to the site</a></p>
+  </main>
+  <script>
+    document.getElementById("signin-button").onclick = function () {
+      var email = document.getElementById("email").value.trim().toLowerCase();
+      if (email !== "chaionjust@gmail.com") {
+        document.getElementById("signin-error").textContent = "That email cannot edit.";
+        return;
+      }
+      try { sessionStorage.setItem("chaion-owner", "1"); } catch (e) {}
+      document.getElementById("signin").hidden = true;
+      document.getElementById("done").hidden = false;
+    };
+  </script>
+</body>
+</html>
