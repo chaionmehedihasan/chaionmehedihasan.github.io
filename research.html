@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Current research | Mehedi Hasan Chaion</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root { --ink:#1c2430; --muted:#5b6573; --line:#e4e8ee; --bg:#f7f5f1; --card:#fff; --accent:#0f5c5c; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "IBM Plex Sans", system-ui, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.55; }
+    a { color: var(--accent); }
+    header { position: sticky; top: 0; background: rgba(247,245,241,.92); border-bottom: 1px solid var(--line); }
+    .bar { max-width: 760px; margin: 0 auto; padding: 14px 22px; display: flex; justify-content: space-between; }
+    .brand { color: var(--ink); font-weight: 600; text-decoration: none; }
+    main { max-width: 760px; margin: 0 auto; padding: 32px 22px 80px; }
+    h1, h2 { font-family: "IBM Plex Serif", Georgia, serif; font-weight: 600; }
+    h1 { font-size: 1.8rem; }
+    .card, .project { background: var(--card); border: 1px solid var(--line); border-radius: 2px; padding: 16px 18px; margin-top: 16px; }
+    label { display: block; font-weight: 500; font-size: 0.82rem; margin-top: 12px; }
+    input, textarea { width: 100%; margin-top: 4px; border: 1px solid var(--line); border-radius: 2px; padding: 8px 10px; font: inherit; background: #fff; }
+    button { margin-top: 14px; min-height: 36px; border: 1px solid var(--accent); border-radius: 2px; background: var(--accent); color: #fff; font: inherit; padding: 0 12px; cursor: pointer; }
+    .text { background: transparent; color: var(--accent); border: 0; padding: 0; }
+    .muted { color: var(--muted); }
+    .error { color: #9b2c2c; font-weight: 500; min-height: 1.4em; }
+    .frame { overflow: hidden; margin-top: 12px; background: #eef3f2; }
+    .track { display: flex; transition: transform 0.7s ease; }
+    .track img { width: 100%; height: 320px; object-fit: contain; flex: none; }
+    .count { font-size: 0.78rem; color: var(--muted); margin-top: 6px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="bar">
+      <a class="brand" href="index.html">Mehedi Hasan Chaion</a>
+      <a href="index.html">Back</a>
+    </div>
+  </header>
+  <main>
+    <h1>Current research</h1>
+    <p class="muted">Add the project title, the objectives, and the images. When there is more than one image, they shift on their own.</p>
+    <form class="card" id="signin">
+      <label for="email">Email</label>
+      <input id="email" type="text" inputmode="email" value="chaionjust@gmail.com" />
+      <p class="error" id="signin-error"></p>
+      <button type="button" id="signin-button">Sign in</button>
+    </form>
+    <form class="card" id="form" hidden>
+      <label for="title">Project title</label>
+      <input id="title" placeholder="Self-powered textile sensor" />
+      <label for="objectives">Objectives</label>
+      <textarea id="objectives" rows="4" placeholder="What this project is trying to measure or make."></textarea>
+      <label for="photos">Images</label>
+      <input id="photos" type="file" accept="image/*" multiple />
+      <p class="error" id="error"></p>
+      <button type="submit">Add this project</button>
+    </form>
+    <div id="list"></div>
+  </main>
+  <script>
+    var KEY = "chaion-research";
+    function signedIn() {
+      try { return sessionStorage.getItem("chaion-owner") === "1"; } catch (e) { return false; }
+    }
+    function read() {
+      try { return JSON.parse(localStorage.getItem(KEY) || "[]"); } catch (e) { return []; }
+    }
+    function write(items) { localStorage.setItem(KEY, JSON.stringify(items)); }
+    function shrink(file) {
+      return new Promise(function (resolve, reject) {
+        var reader = new FileReader();
+        reader.onerror = function () { reject(new Error("Could not read that file.")); };
+        reader.onload = function () {
+          var image = new Image();
+          image.onload = function () {
+            var scale = Math.min(1, 1400 / Math.max(image.width, image.height));
+            var canvas = document.createElement("canvas");
+            canvas.width = Math.round(image.width * scale);
+            canvas.height = Math.round(image.height * scale);
+            canvas.getContext("2d").drawImage(image, 0, 0, canvas.width, canvas.height);
+            resolve(canvas.toDataURL("image/jpeg", 0.82));
+          };
+          image.onerror = function () { reject(new Error("That file is not a readable image.")); };
+          image.src = String(reader.result);
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+    function rotator(images) {
+      if (!images.length) return null;
+      var frame = document.createElement("div");
+      frame.className = "frame";
+      var track = document.createElement("div");
+      track.className = "track";
+      images.forEach(function (src) {
+        var img = document.createElement("img");
+        img.src = src;
+        img.alt = "";
+        track.appendChild(img);
+      });
+      frame.appendChild(track);
+      if (images.length > 1) {
+        var count = document.createElement("p");
+        count.className = "count";
+        var index = 0;
+        function show() {
+          track.style.transform = "translateX(-" + index * 100 + "%)";
+          count.textContent = "Image " + (index + 1) + " of " + images.length;
+        }
+        show();
+        setInterval(function () { index = (index + 1) % images.length; show(); }, 4000);
+        frame.appendChild(count);
+      }
+      return frame;
+    }
+    function draw() {
+      var list = document.getElementById("list");
+      var items = read();
+      list.replaceChildren();
+      if (!items.length) {
+        var empty = document.createElement("p");
+        empty.className = "muted";
+        empty.textContent = "No project posted yet.";
+        list.appendChild(empty);
+        return;
+      }
+      items.forEach(function (item) {
+        var card = document.createElement("article");
+        card.className = "project";
+        var heading = document.createElement("h2");
+        heading.textContent = item.title;
+        card.appendChild(heading);
+        if (item.objectives) {
+          var text = document.createElement("p");
+          text.textContent = item.objectives;
+          card.appendChild(text);
+        }
+        var images = (item.images || []).filter(function (src) { return String(src).indexOf("data:image/") === 0; });
+        var frame = rotator(images);
+        if (frame) card.appendChild(frame);
+        if (signedIn()) {
+          var button = document.createElement("button");
+          button.type = "button";
+          button.className = "text";
+          button.textContent = "Remove";
+          button.onclick = function () {
+            write(read().filter(function (row) { return row.id !== item.id; }));
+            draw();
+          };
+          card.appendChild(button);
+        }
+        list.appendChild(card);
+      });
+    }
+    function unlock() {
+      document.getElementById("signin").hidden = true;
+      document.getElementById("form").hidden = false;
+    }
+    document.getElementById("signin-button").onclick = function () {
+      var email = document.getElementById("email").value.trim().toLowerCase();
+      if (email !== "chaionjust@gmail.com") {
+        document.getElementById("signin-error").textContent = "Only chaionjust@gmail.com can sign in.";
+        return;
+      }
+      try { sessionStorage.setItem("chaion-owner", "1"); } catch (e) {}
+      unlock();
+      draw();
+    };
+    if (signedIn()) unlock();
+    document.getElementById("form").onsubmit = function (event) {
+      event.preventDefault();
+      if (!signedIn()) return;
+      var title = document.getElementById("title").value.trim();
+      var objectives = document.getElementById("objectives").value.trim();
+      var files = Array.prototype.slice.call(document.getElementById("photos").files || []).slice(0, 8);
+      var error = document.getElementById("error");
+      error.textContent = "";
+      if (!title) { error.textContent = "Add a project title."; return; }
+      var save = function (images) {
+        if (!objectives && !images.length) { error.textContent = "Add the objectives or at least one image."; return; }
+        var items = read();
+        items.unshift({ id: String(Date.now()), title: title, objectives: objectives, images: images });
+        write(items);
+        event.target.reset();
+        draw();
+      };
+      if (!files.length) save([]);
+      else Promise.all(files.map(shrink)).then(save).catch(function (reason) { error.textContent = reason.message; });
+    };
+    draw();
+  </script>
+</body>
+</html>
