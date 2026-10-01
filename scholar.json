@@ -1,8 +1,8 @@
 {
-  "citations": 264,
+  "citations": 266,
   "hIndex": 3,
   "i10Index": 2,
-  "checkedAt": "2026-09-30T05:20:11Z",
+  "checkedAt": "2026-10-01T03:21:33Z",
   "source": "https://scholar.google.com/citations?user=E513RsEAAAAJ",
   "papers": [
     {
@@ -10,11 +10,11 @@
       "authors": "T Islam, MH Chaion, MA Jalil, AS Rafi, F Mushtari, AK Dhar, S Hossain",
       "venue": "SPE polymers 5 (4), 481-506, 2024",
       "year": "2024",
-      "citations": 246,
+      "citations": 248,
       "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=E513RsEAAAAJ&pagesize=100&citation_for_view=E513RsEAAAAJ:R3hNpaxXUhUC",
       "impactFactor": "6.4",
       "impactNote": "Journal Impact Factor, stated on the Wiley journal page",
-      "openAlexMean": 9.3
+      "openAlexMean": 9.4
     },
     {
       "title": "A multi-functional coating on cotton fabric to incorporate electro-conductive, anti-bacterial, and flame-retardant properties",
