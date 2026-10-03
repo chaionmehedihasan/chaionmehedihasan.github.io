@@ -1,8 +1,8 @@
 {
-  "citations": 266,
+  "citations": 268,
   "hIndex": 3,
   "i10Index": 2,
-  "checkedAt": "2026-10-01T03:21:33Z",
+  "checkedAt": "2026-10-03T03:07:32Z",
   "source": "https://scholar.google.com/citations?user=E513RsEAAAAJ",
   "papers": [
     {
@@ -10,7 +10,7 @@
       "authors": "T Islam, MH Chaion, MA Jalil, AS Rafi, F Mushtari, AK Dhar, S Hossain",
       "venue": "SPE polymers 5 (4), 481-506, 2024",
       "year": "2024",
-      "citations": 248,
+      "citations": 250,
       "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=E513RsEAAAAJ&pagesize=100&citation_for_view=E513RsEAAAAJ:R3hNpaxXUhUC",
       "impactFactor": "6.4",
       "impactNote": "Journal Impact Factor, stated on the Wiley journal page",
@@ -25,7 +25,7 @@
       "url": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=E513RsEAAAAJ&pagesize=100&citation_for_view=E513RsEAAAAJ:_Qo2XoVZTnwC",
       "impactFactor": null,
       "impactNote": "No Journal Impact Factor in the June 2026 JCR. Web of Science had paused the journal.",
-      "openAlexMean": 9.3
+      "openAlexMean": 9.4
     },
     {
       "title": "Silver nanoparticle based polymer composites: synthesis, fabrication and biomedical applications",
