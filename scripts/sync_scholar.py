@@ -13,10 +13,20 @@ OUT = ROOT / "scholar.json"
 SCHOLAR_URL = "https://scholar.google.com/citations?user=E513RsEAAAAJ&hl=en&cstart=0&pagesize=100"
 
 JOURNALS = [
-    ("spe polymer", "6.4", "Journal Impact Factor, stated on the Wiley journal page"),
-    ("inorganic chemistry", "5.9", "Journal Impact Factor, stated on the Elsevier journal page"),
-    ("nanomaterial", "4.8", "Impact Factor 2025, stated on the MDPI journal page"),
-    ("heliyon", None, "No Journal Impact Factor in the June 2026 JCR. Web of Science had paused the journal."),
+    ("spe polymer", "6.4"),
+    ("inorganic chemistry", "5.9"),
+    ("nanomaterial", "4.8"),
+    ("heliyon", None),
+]
+
+PAPER_FIXES = [
+    (
+        "hydrogel sensors",
+        {
+            "authors": "Md M. Hossain, Tarikul Islam, Mehedi H. Chaion, Mahbubay Rabbani, Md. A. Islam, Mukitur Rhaman, Abu S. Rafi, Md. A. Shahid, Subrata C. Das",
+            "venue": "Nanomaterials 16 (19), 1211, 2026",
+        },
+    ),
 ]
 SOURCES = {
     "spe polymer": "S4210195725",
@@ -33,12 +43,18 @@ def decode(value: str) -> str:
 
 def metric(venue: str):
     text = venue.lower()
-    for key, factor, note in JOURNALS:
+    for key, factor in JOURNALS:
         if key in text:
-            return factor, note
-    if "advances in textile" in text or "sustainability" in text:
-        return None, "Book chapter. Impact factor is a journal number, not a chapter number."
-    return None, "No journal impact factor matched for this venue."
+            return factor
+    return None
+
+
+def apply_fixes(paper: dict) -> dict:
+    title = paper.get("title", "").lower()
+    for key, fields in PAPER_FIXES:
+        if key in title:
+            paper.update(fields)
+    return paper
 
 
 def openalex_means():
@@ -58,7 +74,7 @@ def openalex_means():
     return means
 
 
-def parse(html: str, means: dict):
+def parse(html: str):
     stats = [int(number) for number in re.findall(r'class="gsc_rsb_std">(\d+)', html)]
     titles = re.findall(r'<a href="([^"]+)" class="gsc_a_at">([\s\S]*?)</a>', html)
     grays = [decode(item) for item in re.findall(r'class="gs_gray">([\s\S]*?)</div>', html)]
@@ -72,22 +88,18 @@ def parse(html: str, means: dict):
     papers = []
     for index, (href, title) in enumerate(titles):
         venue = grays[index * 2 + 1]
-        factor, note = metric(venue)
-        key = next((name for name in means if name in venue.lower()), None)
+        factor = metric(venue)
         href = decode(href)
-        papers.append(
-            {
-                "title": decode(title),
-                "authors": grays[index * 2],
-                "venue": venue,
-                "year": years[index] if index < len(years) else "",
-                "citations": cites[index] if index < len(cites) else 0,
-                "url": href if href.startswith("http") else "https://scholar.google.com" + href,
-                "impactFactor": factor,
-                "impactNote": note,
-                "openAlexMean": means.get(key) if key else None,
-            }
-        )
+        paper = {
+            "title": decode(title),
+            "authors": grays[index * 2],
+            "venue": venue,
+            "year": years[index] if index < len(years) else "",
+            "citations": cites[index] if index < len(cites) else 0,
+            "url": href if href.startswith("http") else "https://scholar.google.com" + href,
+            "impactFactor": factor,
+        }
+        papers.append(apply_fixes(paper))
     return {
         "citations": stats[0],
         "hIndex": stats[2],
@@ -105,7 +117,7 @@ def main():
     )
     with urllib.request.urlopen(request, timeout=30) as response:
         html = response.read().decode("utf-8", "replace")
-    data = parse(html, openalex_means())
+    data = parse(html)
     previous = OUT.read_text() if OUT.exists() else ""
     rendered = json.dumps(data, indent=2) + "\n"
     if json.loads(previous or "{}").get("papers") == data["papers"] and json.loads(previous or "{}").get("citations") == data["citations"]:
