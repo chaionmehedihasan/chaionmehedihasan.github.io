@@ -1,1 +1,26 @@
-[]
+[
+  {
+    "id": "cotton-coating",
+    "title": "Multifunctional coatings on cotton",
+    "objectives": "Developed a multifunctional coating on cotton that combined electrical conductivity, antibacterial activity, and flame retardancy, reported in Heliyon in 2024.",
+    "images": []
+  },
+  {
+    "id": "hybrid-composites",
+    "title": "Natural fiber-reinforced hybrid composites",
+    "objectives": "Co-authored a review of natural fiber-reinforced hybrid composites, published in SPE Polymers in 2024.",
+    "images": []
+  },
+  {
+    "id": "ag-np-composites",
+    "title": "Silver nanoparticle\u2013polymer composites",
+    "objectives": "Reviewed the synthesis, fabrication, and biomedical applications of silver nanoparticle-based polymer composites, published in Inorganic Chemistry Communications in 2025.",
+    "images": []
+  },
+  {
+    "id": "hydrogel-sensors",
+    "title": "Nanocomposite hydrogel sensors",
+    "objectives": "Co-authored a review of nanocomposite hydrogel sensors for healthcare, covering fabrication methods and multifunctional performance, published in Nanomaterials in 2026.",
+    "images": []
+  }
+]
